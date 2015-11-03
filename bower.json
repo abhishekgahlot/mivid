@@ -1,0 +1,20 @@
+{
+  "name": "mivid",
+  "version": "0.0.0",
+  "authors": [
+    "Amal Antony <amalantony06@gmail.com>"
+  ],
+  "description": "Viral mini vidoes",
+  "main": "",
+  "moduleType": [],
+  "license": "Private",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
