@@ -14,6 +14,6 @@ gulp.task('browserify', function() {
 
 gulp.task('default', ['browserify']);
 
-gulp.tast('watch', function() {
+gulp.task('watch', function() {
 	gulp.watch('src/**/*.*', ['browserify']);
 });
