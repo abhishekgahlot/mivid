@@ -2,6 +2,7 @@
   "name": "mivid",
   "version": "1.0.0",
   "description": "Viral mini vidoes",
+  "repository": "git@gitlab.com:amalantony/mivid.git",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
