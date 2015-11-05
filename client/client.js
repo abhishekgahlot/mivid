@@ -1,17 +1,15 @@
 // entry point for client
 
-var React = require('react');
-var ReactRouter = require('react-router');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const ReactRouter = require('react-router');
 
-var Route = ReactRouter.Route;
+const Route = ReactRouter.Route;
 
-/*
-var routes = (<Route handler={'./components/skeleton.js'}>
-	<Route name="home" path="/" handler={}></Route>
-	<Route name="video" path="/video/:id" handler={}></Route>
+const routes = (<Route handler={require('./components/Skeleton.js')}>
+	<Route name="home" path="/" handler={require('./components/Home.js')}> </Route>
 </Route>);
 
-ReactRouter.run('routes', ReactRouter.HistoryLocation, function(Root) {
-	React.render(<Root/>, document.getElementById('app'));
+ReactRouter.run(routes, ReactRouter.HistoryLocation, function(Root) {
+	ReactDOM.render(<Root/>, document.getElementById('app'));
 });
-*/

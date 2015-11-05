@@ -1,19 +1,17 @@
-// This is the skeleton component for the app
+/* jshint node:true */
 "use strict";
-var RouteHandler = require('react-router').RouteHandler;
-var Navigation = require('./Navigation.js');
 
-var Skeleton = React.createClass({
-	render: function() {
+const React = require('react');
+const RouteHandler = require('react-router').RouteHandler;
+const Navigation = require('./Navigation.js');
+
+class Skeleton extends React.Component {
+	render() {
 		return(<div>
-			<div class="row">
-				<Navigation></Navigation>
-			</div>
-			<div class="row">
-				<RouteHandler></RouteHandler>
-			</div>
+			<Navigation></Navigation>
+			<RouteHandler></RouteHandler>
 		</div>);
 	}
-});
+}
 
 module.exports = Skeleton;

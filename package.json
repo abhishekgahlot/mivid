@@ -25,7 +25,11 @@
   },
   "dependencies": {
     "babel": "^6.0.15",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
     "react": "^0.14.2",
-    "react-router": "^0.13.5"
+    "react-dom": "^0.14.2",
+    "react-router": "^0.13.5",
+    "reactify": "^1.1.1"
   }
 }
