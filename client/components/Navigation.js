@@ -2,7 +2,6 @@ const React = require('react');
 
 class NavItem extends React.Component {
 	render(){
-		console.log(this.props.className);
 		return (<li className={this.props.className}>
 			<a href="{this.props.linkTo}">
 				{this.props.children}
