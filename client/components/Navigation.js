@@ -1,9 +1,28 @@
 const React = require('react');
 
+class NavItem extends React.Component {
+	render(){
+		console.log(this.props.className);
+		return (<li className={this.props.className}>
+			<a href="{this.props.linkTo}">
+				{this.props.children}
+			</a>
+		</li>);
+	}
+}
 
-class Navigation extends React.Component{
-	getIntialState() {
-		return {
+class NavGroup extends React.Component {
+	render(){
+		return (<ul className="nav navbar-nav pull-right">
+			{this.props.children}
+		</ul>);
+	}
+}
+
+class Navigation extends React.Component {
+	constructor() {
+		super();
+		this.state = {
 			isLoggedIn: false,
 			user: {}
 		};
@@ -14,21 +33,29 @@ class Navigation extends React.Component{
 	}
 
 	render() {
+		let navGroup;
+		if(!this.state.isLoggedIn) {
+			navGroup = (<NavGroup>
+				<NavItem linkTo="#" className="active"> My Feed </NavItem>
+				<NavItem linkTo="#"> Login </NavItem>
+				<NavItem linkTo="#"> Signup </NavItem>
+			</NavGroup>);
+		} else {
+			navGroup = (<NavGroup>
+				<NavItem linkTo="#" className="active"> Feed </NavItem>
+				<NavItem linkTo="#"> My Account </NavItem>
+			</NavGroup>);
+		}
+
 		return (<nav className="navbar navbar-default">
 			<div className="container-fluid">
-				{/* Logo */}
+
 				<div className="navbar-header">
-					<a href="#" className="navbar-brand">MIVID Logo</a>
+					<a href="#" className="navbar-brand"> MIVID </a>
 				</div>
 
-				{/* Menu items */}
-				<div>
-					<ul className="nav navbar-nav">
-						<li className="active"> <a href="#"> Feed </a> </li>
-						<li> <a href="#"> Login </a> </li>
-						<li> <a href="#"> Signup </a> </li>
-					</ul>
-				</div>
+				{navGroup}
+
 			</div>
 		</nav>);
 	}
