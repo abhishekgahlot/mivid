@@ -3,7 +3,7 @@ const React = require('react');
 class NavItem extends React.Component {
 	render(){
 		return (<li className={this.props.className}>
-			<a href="{this.props.linkTo}">
+			<a href={this.props.linkTo}>
 				{this.props.children}
 			</a>
 		</li>);
