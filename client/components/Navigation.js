@@ -2,30 +2,10 @@ const React = require('react');
 const classnames = require('classnames');
 
 class NavItem extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			active: false
-		};
-	}
-
-	componentDidMount() {
-		if(this.props.active == "true") {
-			this.setState({active: true});
-		}
-	}
-
-	handleClick() {
-		if(this.state.active === false) {
-			this.setState({
-				active: true
-			});
-		}
-	}
-
 	render(){
-		let classes = classnames(this.props.className, {active: this.state.active});
-		return (<li className={classes} onClick={this.handleClick.bind(this)}>
+		let classes = classnames(this.props.className, {active: this.props.isActive});
+
+		return (<li className={classes} onClick={this.props.onUserClick}>
 			<a href={this.props.linkTo}>
 				{this.props.children}
 			</a>
@@ -34,9 +14,38 @@ class NavItem extends React.Component {
 }
 
 class NavGroup extends React.Component {
-	render(){
+	constructor() {
+		super();
+		this.state = {
+			activeIndex: 0
+		};
+	}
+
+	handleClick(key) {
+		this.setState({
+			activeIndex: key
+		});
+	}
+
+	render() {
+		let key = -1, navItems;
+		navItems = this.props.tabData.map(function(tab) {
+			key++;
+			return (
+
+				<NavItem
+					linkTo={tab.linkTo}
+					isActive={this.state.activeIndex == key}
+					onUserClick={this.handleClick.bind(this, key)}
+					key={key}>
+					{tab.text}
+				</NavItem>
+				
+			);
+		}.bind(this));
+
 		return (<ul className="nav navbar-nav pull-right">
-			{this.props.children}
+			{navItems}
 		</ul>);
 	}
 }
@@ -50,24 +59,23 @@ class Navigation extends React.Component {
 		};
 	}
 
-	componentDidMount() {
-		//load User and set State.
-	}
-
 	render() {
-		let navGroup;
+		let navGroup, tabData;
 		if(!this.state.isLoggedIn) {
-			navGroup = (<NavGroup>
-				<NavItem linkTo="#" active="true"> Top Videos </NavItem>
-				<NavItem linkTo="#"> Login </NavItem>
-				<NavItem linkTo="#"> Signup </NavItem>
-			</NavGroup>);
+			tabData = [
+				{text: 'Top Vidoes', linkTo: '#'},
+				{text: 'Login', linkTo: '#'},
+				{text: 'Signup', linkTo: '#'}
+			];
 		} else {
-			navGroup = (<NavGroup>
-				<NavItem linkTo="#" active="true"> Top Videos </NavItem>
-				<NavItem linkTo="#"> My Account </NavItem>
-			</NavGroup>);
+			tabData = [
+				{text: 'Top Vidoes', linkTo: '#'},
+				{text: 'My Account', linkTo: '#'},
+				{text: 'Sign out', linkTo: '#'}
+			];
 		}
+
+		navGroup = <NavGroup tabData={tabData}></NavGroup>;
 
 		return (<nav className="navbar navbar-default">
 			<div className="container-fluid">
