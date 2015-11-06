@@ -40,7 +40,7 @@ class NavGroup extends React.Component {
 					key={key}>
 					{tab.text}
 				</NavItem>
-				
+
 			);
 		}.bind(this));
 
@@ -61,21 +61,25 @@ class Navigation extends React.Component {
 
 	render() {
 		let navGroup, tabData;
+
+		const commonTabData = [ // tabs common for logged in & logged out state
+			{text: 'Top Vidoes', linkTo: '#'},
+			{text: 'New Vidoes', linkTo: '#'},
+		];
+
 		if(!this.state.isLoggedIn) {
 			tabData = [
-				{text: 'Top Vidoes', linkTo: '#'},
 				{text: 'Login', linkTo: '#'},
 				{text: 'Signup', linkTo: '#'}
 			];
 		} else {
 			tabData = [
-				{text: 'Top Vidoes', linkTo: '#'},
 				{text: 'My Account', linkTo: '#'},
 				{text: 'Sign out', linkTo: '#'}
 			];
 		}
 
-		navGroup = <NavGroup tabData={tabData}></NavGroup>;
+		navGroup = <NavGroup tabData={commonTabData.concat(tabData)}></NavGroup>;
 
 		return (<nav className="navbar navbar-default">
 			<div className="container-fluid">
