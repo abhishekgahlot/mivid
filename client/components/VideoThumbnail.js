@@ -6,7 +6,11 @@ class VideoThumbnail extends React.Component {
 			<div className="row">
 				<div className="col-xs-6 col-md-3">
 					<div href="#" className="thumbnail">
-						<a href="#"> <img src="https://pbs.twimg.com/profile_images/447374371917922304/P4BzupWu.jpeg" alt="..."/> </a>
+						<a href="#">
+							<img
+								src="http://cdn.shopify.com/s/files/1/0224/1915/files/bunny.jpg?22110"
+								alt="..." />
+						</a>
 						<div className="caption">
 							<a href="#"> <p>Best Bunny video ever!</p> </a>
 							<p>
