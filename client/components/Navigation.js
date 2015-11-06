@@ -1,8 +1,31 @@
 const React = require('react');
+const classnames = require('classnames');
 
 class NavItem extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			active: false
+		};
+	}
+
+	componentDidMount() {
+		if(this.props.active == "true") {
+			this.setState({active: true});
+		}
+	}
+
+	handleClick() {
+		if(this.state.active === false) {
+			this.setState({
+				active: true
+			});
+		}
+	}
+
 	render(){
-		return (<li className={this.props.className}>
+		let classes = classnames(this.props.className, {active: this.state.active});
+		return (<li className={classes} onClick={this.handleClick.bind(this)}>
 			<a href={this.props.linkTo}>
 				{this.props.children}
 			</a>
@@ -35,13 +58,13 @@ class Navigation extends React.Component {
 		let navGroup;
 		if(!this.state.isLoggedIn) {
 			navGroup = (<NavGroup>
-				<NavItem linkTo="#" className="active"> My Feed </NavItem>
+				<NavItem linkTo="#" active="true"> Top Videos </NavItem>
 				<NavItem linkTo="#"> Login </NavItem>
 				<NavItem linkTo="#"> Signup </NavItem>
 			</NavGroup>);
 		} else {
 			navGroup = (<NavGroup>
-				<NavItem linkTo="#" className="active"> Feed </NavItem>
+				<NavItem linkTo="#" active="true"> Top Videos </NavItem>
 				<NavItem linkTo="#"> My Account </NavItem>
 			</NavGroup>);
 		}

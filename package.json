@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "babel": "^6.0.15",
+    "classnames": "^2.2.0",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "react": "^0.14.2",
