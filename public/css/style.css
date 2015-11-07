@@ -1,6 +1,8 @@
-.divider-vertical {
-	height: 50px;
-	margin: 0 9px;
-	border-left: 1px solid #F2F2F2;
-	border-right: 1px solid #FFF;
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,300italic,500,700,900);
+
+html, body{
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  font-family: 'Roboto', sans-serif;
 }
