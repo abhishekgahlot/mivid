@@ -7,14 +7,14 @@ class VideoThumbnail extends React.Component {
 				<div href="#" className="thumbnail">
 					<a href="#">
 						<img
-							src="http://cdn.shopify.com/s/files/1/0224/1915/files/bunny.jpg?22110"
+							src={this.props.src}
 							alt="..." />
 					</a>
 					<div className="caption">
-						<a href="#"> <p>Best Bunny video ever!</p> </a>
+						<a href="#"> <p> {this.props.title} </p> </a>
 						<p>
-							<span> Views (1257) </span>
-							<span className="pull-right"> Points (257) </span>
+							<span> Views: {this.props.viewCount} </span>
+							<span className="pull-right"> Points: {this.props.points} </span>
 						</p>
 					</div>
 				</div>

@@ -8,6 +8,7 @@ const Route = ReactRouter.Route;
 
 const routes = (<Route handler={require('./components/Skeleton.js')}>
 	<Route name="home" path="/" handler={require('./components/Home.js')}> </Route>
+	<Route name="gallery" path="/gallery/:id" handler={require('./components/Gallery.js')}> </Route>
 </Route>);
 
 ReactRouter.run(routes, ReactRouter.HistoryLocation, function(Root) {
