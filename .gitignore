@@ -1,3 +1,4 @@
-public/client.js
 node_modules/
+public/lib
+public/client.js
 .DS_Store
