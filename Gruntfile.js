@@ -379,32 +379,6 @@ module.exports = function (grunt) {
       }
     },
 
-    ngtemplates: {
-      dist: {
-        options: {
-          module: 'mividApp',
-          htmlmin: '<%= htmlmin.dist.options %>',
-          usemin: 'scripts/scripts.js'
-        },
-        cwd: '<%= yeoman.app %>',
-        src: 'views/{,*/}*.html',
-        dest: '.tmp/templateCache.js'
-      }
-    },
-
-    // ng-annotate tries to make the code safe for minification automatically
-    // by using the Angular long form for dependency injection.
-    ngAnnotate: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/concat/scripts',
-          src: '*.js',
-          dest: '.tmp/concat/scripts'
-        }]
-      }
-    },
-
     // Replace Google CDN references
     cdnify: {
       dist: {
@@ -508,16 +482,10 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'postcss',
-    'ngtemplates',
-    'concat',
-    'ngAnnotate',
     'copy:dist',
-    'cdnify',
     'cssmin',
-    'uglify',
     'filerev',
     'usemin',
-    'htmlmin',
     'browserify'
   ]);
 
