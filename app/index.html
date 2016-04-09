@@ -13,12 +13,11 @@
     <!-- endbuild -->
     <link rel="stylesheet/less" type="text/css" href="styles/less/custom-variables.less">
     <link rel="stylesheet/less" href="styles/less/layout.less">
-    <link rel="stylesheet" href="styles/videojs.css">
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/library.css">
     <!-- endbuild -->
-    <script src="styles/less/less-1.7.0.min.js"></script>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/library.css" />
+    <link rel="stylesheet" href="styles/videojs.css" />
   </head>
   <body ng-app="mividApp" style="padding:60px;" id ="body">
     <nav class="navbar navbar-default navbar-fixed-top navbar-primary">
@@ -33,7 +32,6 @@
           </button>
           <a class="navbar-brand" href="#/">Mivid</a>
         </div>
-
         <div class="collapse navbar-collapse" id="navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
                 <li><a href="#login">Login</a></li>
@@ -43,10 +41,7 @@
               <input type="text" class="form-control" placeholder="Search">
             </div>
           </form>
-
         </div><!-- /.navbar-collapse -->
-
-
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
@@ -55,7 +50,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <ng-view></ng-view>
-    <!-- build:js(dist) scripts/vendor.js -->
+    <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -65,16 +60,9 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/less/dist/less.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 
     <!-- build:js({.tmp,app}) scripts/app.js -->
     <script src="scripts/app.js"></script>

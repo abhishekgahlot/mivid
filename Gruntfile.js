@@ -34,7 +34,7 @@ module.exports = function (grunt) {
     browserify: {
         dist: {
             files: {
-              './dist/app.js': ['<%= yeoman.app %>/scripts/app.js']
+              './dist/scripts/app.js': ['<%= yeoman.app %>/scripts/app.js'],
             },
             options: {
               transform: ['babelify']
@@ -415,8 +415,30 @@ module.exports = function (grunt) {
       styles: {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
-        dest: '.tmp/styles/',
+        dest: 'dist/styles/',
         src: '{,*/}*.css'
+      },
+      vendor: {
+        src: ['.tmp/concat/scripts/vendor.js'],
+        dest: '<%= yeoman.dist %>/scripts/vendor.js'
+      },
+      angularTemplates: {
+        expand: true,
+        cwd: 'app/views/',
+        src: ['**'],
+        dest: '<%= yeoman.dist %>/views/'
+      },
+      less: {
+        expand: true,
+        cwd: 'app/styles/less/',
+        src: ['**'],
+        dest: '<%= yeoman.dist %>/styles/less/'
+      },
+      css: {
+        expand: true,
+        cwd: 'app/styles/',
+        src: ['style.css', 'library.css','videojs.css'],
+        dest: '<%= yeoman.dist %>/styles/'
       }
     },
 
@@ -458,6 +480,7 @@ module.exports = function (grunt) {
       'concurrent:server',
       'postcss:server',
       'connect:livereload',
+      'browserify',
       'watch'
     ]);
   });
@@ -482,11 +505,15 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'postcss',
+    'concat',
     'copy:dist',
     'cssmin',
-    'filerev',
     'usemin',
-    'browserify'
+    'browserify',
+    'copy:vendor',
+    'copy:angularTemplates',
+    'copy:less',
+    'copy:css'
   ]);
 
   grunt.registerTask('default', [
