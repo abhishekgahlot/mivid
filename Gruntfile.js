@@ -33,18 +33,11 @@ module.exports = function (grunt) {
 
     browserify: {
         dist: {
-            options: {
-               transform: [
-                  ['babelify', {
-                     loose: 'all'
-                  }]
-               ]
-            },
             files: {
-               // if the source file has an extension of es6 then
-               // we change the name of the source file accordingly.
-               // The result file's extension is always .js
-               './dist/app.js': ['./scripts/app.js']
+              './dist/app.js': ['<%= yeoman.app %>/scripts/app.js']
+            },
+            options: {
+              transform: ['babelify']
             }
         }
     },
@@ -478,6 +471,7 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
