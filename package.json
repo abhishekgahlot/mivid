@@ -47,6 +47,7 @@
     "test": "karma start test/karma.conf.js"
   },
   "dependencies": {
+    "express": "^4.13.4",
     "grunt-cli": "^1.2.0"
   }
 }
