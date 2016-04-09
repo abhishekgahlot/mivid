@@ -31,6 +31,24 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+    browserify: {
+        dist: {
+            options: {
+               transform: [
+                  ['babelify', {
+                     loose: 'all'
+                  }]
+               ]
+            },
+            files: {
+               // if the source file has an extension of es6 then
+               // we change the name of the source file accordingly.
+               // The result file's extension is always .js
+               './dist/app.js': ['./scripts/app.js']
+            }
+        }
+    },
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -39,7 +57,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all', 'newer:jscs:all'],
+        tasks: ['newer:jshint:all', 'newer:jscs:all', 'browserify'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -459,6 +477,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -504,13 +523,15 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'browserify'
   ]);
 
   grunt.registerTask('default', [
     'newer:jshint',
     'newer:jscs',
     'test',
-    'build'
+    'build',
+    'watch'
   ]);
 };
