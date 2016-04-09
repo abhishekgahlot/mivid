@@ -1,0 +1,78 @@
+/*@import url(http://fonts.googleapis.com/css?family=Bilbo);*/
+/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
+@font-face {
+  font-family: 'Bilbo';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Bilbo Regular'), local('Bilbo-Regular'), url(../font/Yxni0HHGbarBJRvB0FZy26CWcynf_cDxXwCLxiixG1c.woff) format('woff');
+}*/
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,300italic,500,700,900);
+
+html, body{
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background: #f5f8fa;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus{
+	outline:none;
+}
+
+body{
+	/*background: #f6f8f8;*/
+}
+
+/* Navbar */
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
+  background: transparent;
+  color: #fff;
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
+  color: #fff;
+}
+
+.main-well{
+  background: transparent;
+  border: none;
+}
+
+.my-video-dimensions{
+  width: 100%;
+}
+
+.well, .panel-default{
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-color: #d3e0e9;
+}
+
+/*Navbar Search*/
+.navbar-primary .form-control,.navbar-primary .form-control:focus {
+    border:1px solid #1C73A5;
+}
+
+.navbar-primary .form-control:focus{
+  width: 150%;
+  margin-left: -50%;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+  background: transparent;
+  border-color: #fff;
+}
+.navbar-default .navbar-toggle .icon-bar{
+  color: #fff;
+  background-color: #fff;
+}
+
+
+.video-home{
+  width: 300px;
+  display: inline-block;
+}
