@@ -47,7 +47,13 @@
     "test": "karma start test/karma.conf.js"
   },
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "connect-redis": "^3.0.2",
     "express": "^4.13.4",
-    "grunt-cli": "^1.2.0"
+    "express-session": "^1.13.0",
+    "grunt-cli": "^1.2.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.0",
+    "redis": "^2.5.3"
   }
 }

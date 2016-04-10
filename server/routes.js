@@ -4,6 +4,29 @@ const express = require('express');
 
 const app = express();
 
+// app confiugration
+const config = require('../config.js');
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+const redis = require('redis');
+const client = redis.createClient();
+const bodyParser = require('body-parser');
+
+const redisOptions = {
+  host: config.redis.host,
+  port: config.redis.port,
+  client: client
+};
+
+app.use(session({
+  store: new RedisStore(redisOptions),
+  secret: config.redis.secret,
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // modules
 const videoModule = require('./modules/video/actions.js');
