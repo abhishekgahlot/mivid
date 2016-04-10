@@ -14,5 +14,6 @@ angular.module('mividApp')
       'AngularJS',
       'Karma'
     ];
-    console.log('main ctrl');
+    
+
   });

@@ -94,6 +94,10 @@ body{
   background-color: #fff;
 }
 
+.navbar-nav>li{
+  color: #fff !important;
+}
+
 .video-home{
   width: 300px;
   display: inline-block;

@@ -14,6 +14,4 @@ angular.module('mividApp')
       'AngularJS',
       'Karma'
     ];
-
-    console.log("loging")
   });
