@@ -11,6 +11,8 @@ const RedisStore = require('connect-redis')(session);
 const redis = require('redis');
 const client = redis.createClient();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const passport = require('passport');
 
 const redisOptions = {
   host: config.redis.host,
@@ -27,6 +29,19 @@ app.use(session({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
+/* passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+}); */
 
 // modules
 const videoModule = require('./modules/video/actions.js');
@@ -45,8 +60,6 @@ app.get('/video/:id', (req, res) => {
   const videoId = req.params.id;
   res.send({videoUrl: videoModule.getTempVideoUrl(videoId)});
 });
-
-console.log('Hello World');
 
 app.listen(process.env.port || 8500, () => {
   console.log('Listening on port 8500');
