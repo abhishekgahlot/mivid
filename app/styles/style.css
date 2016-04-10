@@ -30,6 +30,10 @@ html, body{
     top: 4px !important;
 }
 
+.modal-sm {
+    width: 400px !important;
+}
+
 /*Helpers*/
 .mg-top{
   margin-top: 20px;
@@ -47,6 +51,7 @@ body{
 .navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
   background: transparent;
   color: #fff;
+  cursor: pointer;
 }
 
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
