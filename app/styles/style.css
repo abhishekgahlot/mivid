@@ -21,6 +21,24 @@ html, body{
 	outline:none;
 }
 
+.btn-social {
+  padding: 9px 28px;
+}
+
+.btn-social :first-child {
+    left: 4px !important;
+    top: 4px !important;
+}
+
+/*Helpers*/
+.mg-top{
+  margin-top: 20px;
+}
+
+.mg-btm{
+  margin-bottom: 20px;
+}
+
 body{
 	/*background: #f6f8f8;*/
 }
@@ -71,8 +89,9 @@ body{
   background-color: #fff;
 }
 
-
 .video-home{
   width: 300px;
   display: inline-block;
 }
+
+.

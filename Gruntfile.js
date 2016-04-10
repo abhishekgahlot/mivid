@@ -66,6 +66,10 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
+      html: {
+        files: ['<%= yeoman.app %>/{,*/}*.html'],
+        tasks: [ 'concat', 'copy:dist', 'cssmin', 'usemin', 'browserify', 'copy:vendor', 'copy:angularTemplates', 'copy:less', 'copy:css']
+      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -407,9 +411,9 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }, {
           expand: true,
-          cwd: 'bower_components/bootstrap/dist',
-          src: 'fonts/*',
-          dest: '<%= yeoman.dist %>'
+          cwd: 'bower_components/font-awesome/css',
+          src: 'font-awesome.css',
+          dest: '<%= yeoman.dist %>/styles'
         }]
       },
       styles: {
@@ -439,6 +443,12 @@ module.exports = function (grunt) {
         cwd: 'app/styles/',
         src: ['style.css', 'library.css','videojs.css'],
         dest: '<%= yeoman.dist %>/styles/'
+      },
+      fonts: {
+        expand: true,
+        cwd: 'bower_components/font-awesome/fonts/',
+        src: ['**'],
+        dest: '<%= yeoman.dist %>/fonts/'
       }
     },
 
@@ -513,7 +523,8 @@ module.exports = function (grunt) {
     'copy:vendor',
     'copy:angularTemplates',
     'copy:less',
-    'copy:css'
+    'copy:css',
+    'copy:fonts'
   ]);
 
   grunt.registerTask('default', [
