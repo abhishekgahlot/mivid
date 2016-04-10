@@ -3,6 +3,7 @@
 const express = require('express');
 
 const app = express();
+const dbConnect = require('./dbConnect.js');
 
 // app confiugration
 const config = require('../config.js');
@@ -34,11 +35,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  done(null, user.handle);
 });
 
 passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+  User.findByHandle(handle, function(err, user) {
     done(err, user);
   });
 }); */
@@ -61,6 +62,8 @@ app.get('/video/:id', (req, res) => {
   res.send({videoUrl: videoModule.getTempVideoUrl(videoId)});
 });
 
-app.listen(process.env.port || 8500, () => {
-  console.log('Listening on port 8500');
+dbConnect.connectToMongo().then(dbConnect.ensureIndex).then(function() {
+  app.listen(process.env.port || 8500, () => {
+    console.log('Listening on port 8500');
+  });
 });
