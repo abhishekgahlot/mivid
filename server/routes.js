@@ -34,15 +34,16 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
-/* passport.serializeUser(function(user, done) {
+const User = require('./modules/user/actions.js');
+passport.serializeUser( (user, done) => {
   done(null, user.handle);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findByHandle(handle, function(err, user) {
+passport.deserializeUser( (handle, done) => {
+  User.findByHandle(handle, (err, user) => {
     done(err, user);
   });
-}); */
+});
 
 // modules
 const videoModule = require('./modules/video/actions.js');
@@ -62,7 +63,7 @@ app.get('/video/:id', (req, res) => {
   res.send({videoUrl: videoModule.getTempVideoUrl(videoId)});
 });
 
-dbConnect.connectToMongo().then(dbConnect.ensureIndex).then(function() {
+dbConnect.connectToMongo().then(dbConnect.ensureIndex).then( () => {
   app.listen(process.env.port || 8500, () => {
     console.log('Listening on port 8500');
   });

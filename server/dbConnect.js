@@ -1,5 +1,5 @@
 "use strict";
-var url = 'mongodb://localhost:27017/test';
+var url = 'mongodb://localhost:27017/mivid';
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 

@@ -4,7 +4,12 @@ var assert = require('assert');
 
 module.exports = {
     findByHandle: (handle) => {
-      GLOBAL.db.collection('users').find({});
+      GLOBAL.db.collection('users').findOne({handle: handle}, (err, result) => {
+        assert.equal(err, null);
+        return new Promise((resolve) => {
+          resolve(result);
+        });
+      });
     },
 
     create: (handle, email, fullname, type) => {
