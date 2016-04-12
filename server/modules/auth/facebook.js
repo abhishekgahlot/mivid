@@ -10,9 +10,8 @@ module.exports = function(app, passport) {
       clientSecret: config.auth.facebook.secret,
       callbackURL: 'http://localhost:8500/login/facebook/return',
       profileFields: ['id', 'emails', 'name']
-    },
-    (accessToken, refreshToken, profile, cb) => {
-      //TODO: associate profile with DB
+    }, (accessToken, refreshToken, profile, cb) => {
+      //TODO: associate profile with use in DB
       console.log('Got user profile:', profile);
       return cb(null, profile);
     }));
