@@ -34,8 +34,9 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
-const User = require('./modules/user/actions.js');
-passport.serializeUser( (user, done) => {
+// const User = require('./modules/user/actions.js');
+
+/*passport.serializeUser( (user, done) => {
   done(null, user.handle);
 });
 
@@ -43,7 +44,17 @@ passport.deserializeUser( (handle, done) => {
   User.findByHandle(handle, (err, user) => {
     done(err, user);
   });
+}); */
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
 });
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+require('./modules/auth/facebook.js')(app, passport);
 
 // modules
 const videoModule = require('./modules/video/actions.js');
@@ -62,6 +73,7 @@ app.get('/video/:id', (req, res) => {
   const videoId = req.params.id;
   res.send({videoUrl: videoModule.getTempVideoUrl(videoId)});
 });
+
 
 dbConnect.connectToMongo().then(dbConnect.ensureIndex).then( () => {
   app.listen(process.env.port || 8500, () => {

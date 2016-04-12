@@ -4,5 +4,11 @@ module.exports = {
     secret: 'fluffyKittens@',
     host: 'localhost',
     port: 6379
+  },
+  auth: {
+    facebook: {
+      secret: '60c81a2b271d6e73e3853f26eefdbb1e',
+      id: '1589008021426802'
+    }
   }
 };
