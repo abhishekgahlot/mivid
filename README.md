@@ -10,3 +10,12 @@ Run `grunt` for building and `grunt serve` for preview.
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
+
+## TODO
+
+* upload -> abhishek (fri)
+
+* stream -> abhisek (TBD)
+
+* search ->  me (fri)
+* thumbnails -> me (fri)
