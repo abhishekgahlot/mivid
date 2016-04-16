@@ -102,3 +102,7 @@ body{
   width: 300px;
   display: inline-block;
 }
+
+.modal-content .panel{
+  border: none !important;
+}

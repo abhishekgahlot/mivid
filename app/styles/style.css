@@ -102,3 +102,21 @@ body{
   width: 300px;
   display: inline-block;
 }
+
+.modal-content {
+  top:50px !important;
+}
+
+.modal-content .panel{
+  border: none !important;
+  box-shadow: none !important;
+  margin-bottom: 0px !important;
+}
+
+.panel-body .modal-title {
+  margin-bottom: 28px !important;
+}
+
+.handle-btn {
+  margin-top: 15px;
+}

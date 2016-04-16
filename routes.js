@@ -31,12 +31,13 @@ app.use(session({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('public'));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
-app.engine('.hbs', exphbs({defaultLayout: 'index', extname: '.hbs',layoutsDir: __dirname + '/views/'}));
+app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs',layoutsDir: __dirname + '/views/'}));
 app.set('view engine', '.hbs');
-app.use(express.static('public'));
+
 
 // const User = require('./modules/user/actions.js');
 
@@ -67,7 +68,7 @@ const videoModule = require('./server/modules/video/actions.js');
 app.get('/', (req, res) => {
   const pageNumber = req.query.page || 0;
   console.log('Executing fetch for pageNumber', pageNumber);
-  res.render('index');
+  res.render('main');
   // videoModule
   //   .fetchList(pageNumber)
   //   .then((videoList) => {
@@ -80,6 +81,9 @@ app.get('/video/:id', (req, res) => {
   res.send({videoUrl: videoModule.getTempVideoUrl(videoId)});
 });
 
+app.get('*', (req, res) => {
+  res.render('main');
+});
 
 dbConnect.connectToMongo().then(dbConnect.ensureIndex).then( () => {
   app.listen(process.env.port || 8500, () => {

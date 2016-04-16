@@ -16,7 +16,10 @@ angular
     'ngRoute',
     'ngSanitize'
   ])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', '$locationProvider',function ($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode({
+      enabled: true
+    });
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -41,4 +44,4 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  }]);
