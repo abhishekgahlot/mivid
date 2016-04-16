@@ -55,6 +55,7 @@ passport.deserializeUser(function(obj, cb) {
 });
 
 require('./modules/auth/facebook.js')(app, passport);
+require('./modules/auth/google.js')(app, passport);
 
 // modules
 const videoModule = require('./modules/video/actions.js');

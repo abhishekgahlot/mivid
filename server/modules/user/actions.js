@@ -3,10 +3,20 @@
 var assert = require('assert');
 
 module.exports = {
-    findByHandle: (handle) => {
-      GLOBAL.db.collection('users').findOne({handle: handle}, (err, result) => {
-        assert.equal(err, null);
-        return new Promise((resolve) => {
+    findByEmail: (email) => {
+      return new Promise((resolve) => {
+        GLOBAL.db.collection('users').findOne({email: email}, (err, result) => {
+          assert.equal(err, null);
+          console.log('Result of findByEmail', result);
+          resolve(result);
+        });
+      });
+    },
+
+    findByHandle: (handle) =>   {
+      return new Promise((resolve) => {
+        GLOBAL.db.collection('users').findOne({handle: handle}, (err, result) => {
+          assert.equal(err, null);
           resolve(result);
         });
       });
