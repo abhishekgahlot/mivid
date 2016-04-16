@@ -22,7 +22,7 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'public'
   };
 
   // Define the configuration for all the tasks
@@ -34,7 +34,7 @@ module.exports = function (grunt) {
     browserify: {
         dist: {
             files: {
-              './dist/scripts/app.js': ['<%= yeoman.app %>/scripts/app.js'],
+              './public/scripts/app.js': ['<%= yeoman.app %>/scripts/app.js'],
             },
             options: {
               transform: ['babelify']
@@ -449,6 +449,10 @@ module.exports = function (grunt) {
         cwd: 'bower_components/font-awesome/fonts/',
         src: ['**'],
         dest: '<%= yeoman.dist %>/fonts/'
+      },
+      views: {
+        src: ['<%= yeoman.dist %>/index.html'],
+        dest: 'views/index.hbs'
       }
     },
 
@@ -524,7 +528,8 @@ module.exports = function (grunt) {
     'copy:angularTemplates',
     'copy:less',
     'copy:css',
-    'copy:fonts'
+    'copy:fonts',
+    'copy:views'
   ]);
 
   grunt.registerTask('default', [
