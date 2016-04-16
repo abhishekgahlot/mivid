@@ -13,6 +13,7 @@
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+  border: none !important
 }
 
 .btn-social :first-child {
