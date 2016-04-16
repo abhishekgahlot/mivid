@@ -31,7 +31,7 @@ html, body{
 }
 
 .modal-sm {
-    width: 400px !important;
+    width: 440px !important;
 }
 
 /*Helpers*/
@@ -102,5 +102,3 @@ body{
   width: 300px;
   display: inline-block;
 }
-
-.

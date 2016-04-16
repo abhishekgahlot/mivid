@@ -1,2 +1,2 @@
 require('babel-core/register');
-require('./server/routes.js');
+require('./routes.js');

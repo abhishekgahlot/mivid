@@ -18,17 +18,40 @@ html, body{
 }
 
 .btn:focus, .btn:active:focus, .btn.active:focus{
-	outline:none;
+  outline:none;
+}
+
+.btn-social {
+  padding: 9px 28px;
+}
+
+.btn-social :first-child {
+    left: 4px !important;
+    top: 4px !important;
+}
+
+.modal-sm {
+    width: 440px !important;
+}
+
+/*Helpers*/
+.mg-top{
+  margin-top: 20px;
+}
+
+.mg-btm{
+  margin-bottom: 20px;
 }
 
 body{
-	/*background: #f6f8f8;*/
+  /*background: #f6f8f8;*/
 }
 
 /* Navbar */
 .navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
   background: transparent;
   color: #fff;
+  cursor: pointer;
 }
 
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
@@ -71,6 +94,9 @@ body{
   background-color: #fff;
 }
 
+.navbar-nav>li{
+  color: #fff !important;
+}
 
 .video-home{
   width: 300px;
