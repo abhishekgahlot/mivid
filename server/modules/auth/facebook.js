@@ -2,7 +2,6 @@
 
 const Strategy = require('passport-facebook').Strategy;
 const config = require('../../../config.js');
-const User = require('../user/actions.js');
 
 module.exports = function(app, passport) {
   passport.use(new Strategy({
@@ -11,18 +10,7 @@ module.exports = function(app, passport) {
       callbackURL: 'http://localhost:8500/login/facebook/return',
       profileFields: ['id', 'emails', 'name']
     }, (accessToken, refreshToken, profile, cb) => {
-      //TODO: associate profile with use in DB
-      console.log('Got user profile:', profile);
-      User
-        .findByEmail({email: profile.emails[0].value})
-        .then(function(user) {
-          if(user) {
-            //user exisits, get details and log him in
-          } else {
-            //create new user.
-          }
-        });
-      return cb(null, profile);
+      require('./oAuthExternal.js')(accessToken, refreshToken, profile, cb, 'facebook');
     }));
 
     app.get('/test', (req, res) => {
@@ -33,6 +21,7 @@ module.exports = function(app, passport) {
     app.get('/login/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
     app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/test' }), (req, res) => {
-        res.redirect('/');
+        const resObj = {user: JSON.stringify(req.user)};
+        res.render('main', resObj);
     });
 };

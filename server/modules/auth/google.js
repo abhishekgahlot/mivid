@@ -1,7 +1,6 @@
 "use strict";
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const config = require('../../../config.js');
-const User = require('../user/actions.js');
 
 module.exports = function(app, passport) {
   passport.use(new GoogleStrategy({
@@ -10,23 +9,19 @@ module.exports = function(app, passport) {
     callbackURL: 'http://localhost:8500/login/google/return',
     profileFields: ['id', 'emails', 'name']
   }, (accessToken, refreshToken, profile, cb) => {
-    console.log('Google login successful', profile);
-    User
-      .findByEmail({email: profile.emails[0].value})
-      .then(function(user) {
-        if(user) {
-          //user exisits, get details and log him in
-        } else {
-          //create new user.
-        }
-      });
-    return cb(null, profile);
+    require('./oAuthExternal.js')(accessToken, refreshToken, profile, cb, 'google');
   }));
 
   app.get('/login/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
 
   app.get('/login/google/return', passport.authenticate('google', {failureRedirect: '/login' }), (req, res) => {
-    res.redirect('/');
+    const resObj = {user: JSON.stringify(req.user)};
+    res.render('main', resObj);
+  });
+
+  app.get('/tmp', (req, res) => {
+    console.log(req.user);
+    res.send();
   });
 
 };

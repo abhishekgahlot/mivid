@@ -19,3 +19,5 @@ Running `grunt test` will run the unit tests with karma.
 
 * search ->  me (fri)
 * thumbnails -> me (fri)
+
+* Handle creation 

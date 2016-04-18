@@ -7,7 +7,7 @@ module.exports = {
       return new Promise((resolve) => {
         GLOBAL.db.collection('users').findOne({email: email}, (err, result) => {
           assert.equal(err, null);
-          console.log('Result of findByEmail', result);
+          console.log('Result of findByEmail', email, result);
           resolve(result);
         });
       });
@@ -25,16 +25,17 @@ module.exports = {
     create: (handle, email, fullname, type) => {
       // type => "facebook", "google", "oauth" etc
       // also store creation time and signup mechanism
-      GLOBAL.db.collection('users').insertOne({
-        handle: handle,
-        email: email,
-        fullname: fullname,
-        type: type
-      }, (err, result) => {
-        assert.equal(err, null);
-        return new Promise(function(resolve) {
+      return new Promise(function(resolve) {
+        GLOBAL.db.collection('users').insertOne({
+          handle: handle,
+          email: email,
+          fullName: fullname,
+          type: type
+        }, (err, result) => {
+          assert.equal(err, null);
           resolve(result);
         });
       });
+
     }
 };

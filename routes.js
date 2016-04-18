@@ -65,24 +65,24 @@ require('./server/modules/auth/google.js')(app, passport);
 // modules
 const videoModule = require('./server/modules/video/actions.js');
 
-app.get('/', (req, res) => {
-  const pageNumber = req.query.page || 0;
-  console.log('Executing fetch for pageNumber', pageNumber);
-  res.render('main');
-  // videoModule
-  //   .fetchList(pageNumber)
-  //   .then((videoList) => {
-  //     res.send(videoList);
-  //   });
-});
-
 app.get('/video/:id', (req, res) => {
   const videoId = req.params.id;
   res.send({videoUrl: videoModule.getTempVideoUrl(videoId)});
 });
 
+app.get('/logout', function(req, res) {
+  console.log('Logging out');
+  req.logout();
+  res.redirect('/test');
+});
+
 app.get('*', (req, res) => {
-  res.render('main');
+  if (req.user) {
+    console.log(req.user);
+    res.render('main', {user: JSON.stringify(req.user)});
+  } else {
+    res.render('main', {user: JSON.stringify({})});
+  }
 });
 
 dbConnect.connectToMongo().then(dbConnect.ensureIndex).then( () => {
