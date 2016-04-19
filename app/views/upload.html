@@ -24,10 +24,6 @@
     cursor: pointer !important;
 }
 
-.upl-max-txt{
-
-}
-
 .upl-mini-txt{
     color: #969A99;
     font-size: 15px;
@@ -42,15 +38,26 @@
 </style>
 <div class="container upload-container">
     <div class="dropzone" id="uploadVideos">
-        <h2 class="upl-max-txt">You can upload Movies</h2>
+        <h2 class="upl-max-txt">You can upload Videos</h2>
         <h4 class="upl-mini-txt">Click On The Button Or Drag & Drop Files Here</h4>
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-primary btn-lg btn-upload btn-upl-lft"><i class="fa fa-upload" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-primary btn-lg btn-upload">Upload Video</button>
+        <div id="uploadgroupbtn">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary btn-lg btn-upload btn-upl-lft"><i class="fa fa-upload" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-primary btn-lg btn-upload">Upload Video</button>
+          </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    new Dropzone("div#uploadVideos", { url: "/", maxFilesize: 5, autoProcessQueue:false});
+    var uploader = new Dropzone("div#uploadVideos",
+    {
+      url: "http://upload.mivid.co:8500",
+      maxFilesize: 5,
+      init: function(){
+        $(".btn-upload").on("click", function(){
+          this.hiddenFileInput.click();
+        }.bind(this));
+      }
+    });
     $(".dz-default.dz-message").hide();
 </script>
