@@ -1,41 +1,25 @@
 "use strict";
 
-var assert = require('assert');
+const store = require('../store/store.js');
 
 module.exports = {
     findByEmail: (email) => {
-      return new Promise((resolve) => {
-        GLOBAL.db.collection('users').findOne({email: email}, (err, result) => {
-          assert.equal(err, null);
-          console.log('Result of findByEmail', email, result);
-          resolve(result);
-        });
-      });
+      return store.findByAttribute('users','email', email);
     },
 
     findByHandle: (handle) => {
-      return new Promise((resolve) => {
-        GLOBAL.db.collection('users').findOne({handle: handle}, (err, result) => {
-          assert.equal(err, null);
-          resolve(result);
-        });
-      });
+      return store.findByAttribute('users', 'handle', handle);
     },
 
     create: (handle, email, fullname, type) => {
       // type => "facebook", "google", "local" etc
       // also store creation time and signup mechanism
-      return new Promise(function(resolve) {
-        GLOBAL.db.collection('users').insertOne({
-          handle: handle,
-          email: email,
-          fullName: fullname,
-          type: type
-        }, (err, result) => {
-          assert.equal(err, null);
-          resolve(result);
-        });
-      });
-
+      const userData = {
+        handle: handle,
+        email: email,
+        fullName: fullname,
+        type: type
+      };
+      return store.create('users', userData);
     }
 };
