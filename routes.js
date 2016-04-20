@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 const dbConnect = require('./server/dbConnect.js');
 
+const makeUserSafe = require('./utils.js').makeUserSafe;
+
 // app confiugration
 const config = require('./config.js');
 const session = require('express-session');
@@ -83,7 +85,7 @@ app.get('/logout', function(req, res) {
 app.get('*', (req, res) => {
   if (req.user) {
     console.log(req.user);
-    res.render('main', {user: JSON.stringify(req.user)});
+    res.render('main', {user: JSON.stringify(makeUserSafe(req.user))});
   } else {
     res.render('main', {user: JSON.stringify({})});
   }

@@ -2,6 +2,7 @@
 
 const Strategy = require('passport-facebook').Strategy;
 const config = require('../../../config.js');
+const makeUserSafe = require('../../../utils.js').makeUserSafe;
 
 module.exports = function(app, passport) {
   passport.use(new Strategy({
@@ -21,7 +22,7 @@ module.exports = function(app, passport) {
     app.get('/login/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
     app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/test' }), (req, res) => {
-        const resObj = {user: JSON.stringify(req.user)};
+        const resObj = {user: JSON.stringify(makeUserSafe(req.user))};
         res.render('main', resObj);
     });
 };

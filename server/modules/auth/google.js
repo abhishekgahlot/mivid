@@ -1,6 +1,7 @@
 "use strict";
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const config = require('../../../config.js');
+const makeUserSafe = require('../../../utils.js').makeUserSafe;
 
 module.exports = function(app, passport) {
   passport.use(new GoogleStrategy({
@@ -15,13 +16,7 @@ module.exports = function(app, passport) {
   app.get('/login/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
 
   app.get('/login/google/return', passport.authenticate('google', {failureRedirect: '/login' }), (req, res) => {
-    const resObj = {user: JSON.stringify(req.user)};
+    const resObj = {user: JSON.stringify(makeUserSafe(req.user))};
     res.render('main', resObj);
   });
-
-  app.get('/tmp', (req, res) => {
-    console.log(req.user);
-    res.send();
-  });
-
 };
