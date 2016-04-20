@@ -3,7 +3,7 @@
 const express = require('express');
 
 const app = express();
-const dbConnect = require('./server/dbConnect.js');
+const dbConnect = require('./dbConnect.js');
 
 const makeUserSafe = require('./utils.js').makeUserSafe;
 
