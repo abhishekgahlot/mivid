@@ -16,6 +16,10 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const exphbs = require('express-handlebars');
 
+client.on('error', (err) => {
+  console.log('Error', err);
+});
+
 const redisOptions = {
   host: config.redis.host,
   port: config.redis.port,

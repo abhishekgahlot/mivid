@@ -17,7 +17,7 @@ module.exports = {
   ensureIndex: function() {
     console.log('Setting indexes on Mongo');
     return new Promise(function(resolve) {
-      GLOBAL.db.collection('users').createIndex({'handle': 1}, null, function(err, results) {
+      GLOBAL.db.collection('users').createIndex({'handle': 1, 'email': 1}, null, function(err, results) {
         assert.equal(null, err);
         resolve(results);
       });

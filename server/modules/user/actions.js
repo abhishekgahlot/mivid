@@ -13,7 +13,7 @@ module.exports = {
       });
     },
 
-    findByHandle: (handle) =>   {
+    findByHandle: (handle) => {
       return new Promise((resolve) => {
         GLOBAL.db.collection('users').findOne({handle: handle}, (err, result) => {
           assert.equal(err, null);
@@ -23,7 +23,7 @@ module.exports = {
     },
 
     create: (handle, email, fullname, type) => {
-      // type => "facebook", "google", "oauth" etc
+      // type => "facebook", "google", "local" etc
       // also store creation time and signup mechanism
       return new Promise(function(resolve) {
         GLOBAL.db.collection('users').insertOne({
