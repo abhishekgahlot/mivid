@@ -73,6 +73,9 @@ app.get('/logout', function(req, res) {
 });
 
 app.get('/createHandle', (req, res) => {
+  if (!req.user) {
+    res.redirect('/');
+  }
   console.log('Got Handle request', req.query.handle, "Current user handle", typeof req.user.handle);
   const handle = req.query.handle;
   if(!req.user.handle && validateHandle(handle)) {
