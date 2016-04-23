@@ -41,6 +41,11 @@ angular
         controller: 'UploadCtrl',
         controllerAs: 'upload'
       })
+      .when('/handle', {
+        templateUrl: 'views/handle.html',
+        controller: 'HandleCtrl',
+        controllerAs: 'handle'
+      })
       .otherwise({
         redirectTo: '/'
       });

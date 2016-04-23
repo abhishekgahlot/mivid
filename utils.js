@@ -11,5 +11,9 @@ module.exports = {
       safeUser[key] = user[key];
     });
     return safeUser;
+  },
+  validateHandle: (handle) => {
+    // TODO: write this logic
+    return true;
   }
 };

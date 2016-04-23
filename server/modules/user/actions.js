@@ -21,5 +21,9 @@ module.exports = {
         type: type
       };
       return store.create('users', userData);
+    },
+
+    update: (query, attributes) => {
+      return store.update('users', query, attributes);
     }
 };

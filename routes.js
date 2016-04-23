@@ -1,11 +1,13 @@
 "use strict";
 
 const express = require('express');
+const assert = require('assert');
 
 const app = express();
 const dbConnect = require('./dbConnect.js');
 
 const makeUserSafe = require('./utils.js').makeUserSafe;
+const validateHandle = require('./utils.js').validateHandle;
 
 // app confiugration
 const config = require('./config.js');
@@ -44,19 +46,6 @@ app.use(passport.session());
 app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs',layoutsDir: __dirname + '/views/'}));
 app.set('view engine', '.hbs');
 
-
-// const User = require('./modules/user/actions.js');
-
-/*passport.serializeUser( (user, done) => {
-  done(null, user.handle);
-});
-
-passport.deserializeUser( (handle, done) => {
-  User.findByHandle(handle, (err, user) => {
-    done(err, user);
-  });
-}); */
-
 passport.serializeUser(function(user, cb) {
   cb(null, user);
 });
@@ -70,6 +59,7 @@ require('./server/modules/auth/google.js')(app, passport);
 
 // modules
 const videoModule = require('./server/modules/video/actions.js');
+const UserModule = require('./server/modules/user/actions.js');
 
 app.get('/video/:id', (req, res) => {
   const videoId = req.params.id;
@@ -82,9 +72,27 @@ app.get('/logout', function(req, res) {
   res.redirect('/test');
 });
 
+app.get('/createHandle', (req, res) => {
+  console.log('Got Handle request', req.query.handle, "Current user handle", typeof req.user.handle);
+  const handle = req.query.handle;
+  if(!req.user.handle && validateHandle(handle)) {
+    console.log('Handle successfully validated');
+    UserModule.update({email: req.user.email}, {handle: handle})
+    .then((results) => {
+      console.log('Updated user handle successfully', results);
+      req.login(results, (err) => {
+        assert.equal(err,null);
+        res.redirect('/');
+      });
+    });
+  } else {
+    console.log('User has handle, redirecting to home page');
+    res.redirect('/');
+  }
+});
+
 app.get('*', (req, res) => {
   if (req.user) {
-    console.log(req.user);
     res.render('main', {user: JSON.stringify(makeUserSafe(req.user))});
   } else {
     res.render('main', {user: JSON.stringify({})});
