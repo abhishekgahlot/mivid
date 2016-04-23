@@ -85,7 +85,10 @@ app.get('/createHandle', (req, res) => {
         res.redirect('/');
       });
     });
-  } else {
+  } else if (!validateHandle(handle)) {
+    res.redirect('/handle');
+  }
+  else {
     console.log('User has handle, redirecting to home page');
     res.redirect('/');
   }
