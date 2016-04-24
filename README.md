@@ -13,22 +13,26 @@ Running `grunt test` will run the unit tests with karma.
 
 ## TODO
 
-* upload -> abhishek (fri)
+Abhishek tasks:
+----------------------
+* upload & thumbnails
 
-* stream -> abhisek (TBD)
+* stream
 
-* search -> me
+* Commenting
 
-* thumbnails -> me (fri)
+* Video gallery page
 
-* OAuth & User accounts -> me
 
-* Handle creation -> me
+Amal tasks:
+-----------------------
+* search & search results page.
 
-* Commenting -> abhishek
-
-* User profile -> me
-
-* Video gallery page -> abhishek
+* User profile
 
 * Notification system -> notify users on new comments on their videos and in replies to their comments -> me
+
+
+* OAuth & User accounts (done)
+
+* Handle creation (done)
