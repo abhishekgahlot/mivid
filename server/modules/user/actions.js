@@ -1,7 +1,6 @@
 "use strict";
 
 const store = require('../store/store.js');
-const aesEncrypt = require('../../../utils.js').aesEncrypt;
 
 module.exports = {
     findByEmail: (email) => {
@@ -15,7 +14,7 @@ module.exports = {
     create: (handle, email, fullname, type) => {
       // type => "facebook", "google", "local" etc
       // also store creation time and signup mechanism
-      const authToken = aesEncrypt(JSON.stringify({email: email, timestamp: Date.now()}));
+
       const userData = {
         handle: handle,
         email: email,
