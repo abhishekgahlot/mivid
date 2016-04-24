@@ -21,6 +21,8 @@ Running `grunt test` will run the unit tests with karma.
 
 * thumbnails -> me (fri)
 
+* OAuth & User accounts -> me
+
 * Handle creation -> me
 
 * Commenting -> abhishek
