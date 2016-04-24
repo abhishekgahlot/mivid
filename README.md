@@ -17,7 +17,16 @@ Running `grunt test` will run the unit tests with karma.
 
 * stream -> abhisek (TBD)
 
-* search ->  me (fri)
+* search -> me
+
 * thumbnails -> me (fri)
 
-* Handle creation 
+* Handle creation -> me
+
+* Commenting -> abhishek
+
+* User profile -> me
+
+* Video gallery page -> abhishek
+
+* Notification system -> notify users on new comments on their videos and in replies to their comments -> me
