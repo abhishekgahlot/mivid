@@ -5,6 +5,8 @@ const assert = require('assert');
 
 const app = express();
 const dbConnect = require('./dbConnect.js');
+const aesEncrypt = require('./utils.js').aesEncrypt;
+
 
 const makeUserSafe = require('./utils.js').makeUserSafe;
 const validateHandle = require('./utils.js').validateHandle;
@@ -79,8 +81,9 @@ app.get('/createHandle', (req, res) => {
   console.log('Got Handle request', req.query.handle, "Current user handle", typeof req.user.handle);
   const handle = req.query.handle;
   if(!req.user.handle && validateHandle(handle)) {
-    console.log('Handle successfully validated');
-    UserModule.update({email: req.user.email}, {handle: handle})
+    console.log('Handle successfully validated, generating auth token for the user');
+    const authToken = aesEncrypt(JSON.stringify({email: req.user.email, handle: handle, timestamp: Date.now()}));
+    UserModule.update({email: req.user.email}, {handle: handle, authToken: authToken})
     .then((results) => {
       console.log('Updated user handle successfully', results);
       req.login(results, (err) => {

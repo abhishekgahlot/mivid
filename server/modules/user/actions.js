@@ -21,7 +21,7 @@ module.exports = {
         email: email,
         fullName: fullname,
         type: type,
-        authToken: authToken
+        authToken: ""
       };
       return store.create('users', userData);
     },
