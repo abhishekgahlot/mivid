@@ -79,5 +79,8 @@
         }.bind(this));
       }
     });
+    uploader.on('sending', function(file, xhr, formData){
+      xhr.setRequestHeader('user', JSON.stringify(Mivid.user));
+    });
     $(".dz-default.dz-message").hide();
 </script>
