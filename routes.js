@@ -61,7 +61,8 @@ require('./server/modules/auth/google.js')(app, passport);
 
 // modules
 const videoModule = require('./server/modules/video/actions.js');
-const UserModule = require('./server/modules/user/actions.js');
+const userModule = require('./server/modules/user/actions.js');
+const searchModule = require('./server/modules/search/search.js');
 
 app.get('/video/:id', (req, res) => {
   const videoId = req.params.id;
@@ -83,7 +84,7 @@ app.get('/createHandle', (req, res) => {
   if(!req.user.handle && validateHandle(handle)) {
     console.log('Handle successfully validated, generating auth token for the user');
     const authToken = aesEncrypt(JSON.stringify({email: req.user.email, handle: handle, timestamp: Date.now()}));
-    UserModule.update({email: req.user.email}, {handle: handle, authToken: authToken})
+    userModule.update({email: req.user.email}, {handle: handle, authToken: authToken})
     .then((results) => {
       console.log('Updated user handle successfully', results);
       req.login(results, (err) => {
@@ -98,6 +99,26 @@ app.get('/createHandle', (req, res) => {
     console.log('User has handle, redirecting to home page');
     res.redirect('/');
   }
+});
+
+app.post('/video-meta', (req, res) => {
+  var videoMeta = req.body;
+  console.log('Got video meta data', videoMeta);
+  // write this to DB
+  // index on elasticSearch
+  videoModule.create(videoMeta)
+  .then((results) => {
+    console.log('successfully created video in DB, adding to elasticSearch ', results);
+    res.send({state: "success"});
+  });
+});
+
+app.get('/search', (req, res) => {
+  const query = req.query.query;
+  searchModule.search(query).then((data) => {
+    console.log('Ran the search for', query,  "and got the results", data);
+    res.send(data);
+  });
 });
 
 app.get('*', (req, res) => {

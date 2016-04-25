@@ -1,6 +1,7 @@
 "use strict";
 
 const aesEncrypt = require('../../../utils.js').aesEncrypt;
+const store = require('../store/store.js');
 
 module.exports = {
 
@@ -23,7 +24,9 @@ module.exports = {
     return "/" + aesEncrypt(text);
   },
 
-  upLoad: () => {
-
+  create: (metaData) => {
+    metaData.creationTime = Date.now();
+    console.log('Storing video metatdata to DB', metaData);
+    return store.create('videos', metaData);
   }
 };
