@@ -7,8 +7,7 @@ const client = new elasticsearch.Client({
 });
 
 module.exports = {
-  index: function(data) {
-
+  indexDocument: function(data) {
   },
   search: function(query) {
     return new Promise((resolve) => {
