@@ -1,7 +1,6 @@
 "use strict";
 
-const config = require('../../../config.js');
-var crypto = require('crypto');
+const aesEncrypt = require('../../../utils.js').aesEncrypt;
 
 module.exports = {
 
@@ -21,14 +20,7 @@ module.exports = {
     const timestamp = Date.now();
     const text = videoId + ":" + timestamp;
 
-    const password = config.aesPassword;
-    const algorithm = 'aes-256-ctr';
-
-    const cipher = crypto.createCipher(algorithm, password);
-    let crypted = cipher.update(text, 'utf8', 'hex');
-    crypted += cipher.final('hex');
-
-    return "/" + crypted;
+    return "/" + aesEncrypt(text);
   },
 
   upLoad: () => {
