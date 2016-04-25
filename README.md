@@ -38,9 +38,9 @@ Amal tasks:
 * Handle creation (done)
 
 
-Release 1 (ToDOS):
+# Release 1 (ToDOS):
 - Video uploading.
-- Get the initial video listing page up with paginations. 
+- Get the initial video listing page up with paginations.
 - Search results view with search working.
 - Individual Video streaming page (gallery can be part of a later release)
 - oAuth & user accounts.

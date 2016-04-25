@@ -107,8 +107,10 @@ app.post('/video-meta', (req, res) => {
   // write this to DB
   // index on elasticSearch
   videoModule.create(videoMeta)
-  .then((results) => {
-    console.log('successfully created video in DB, adding to elasticSearch ', results);
+  .then(() => {
+    console.log('successfully created video in DB, adding to elasticSearch ');
+    delete videoMeta._id;
+    searchModule.indexDocument('video', videoMeta);
     res.send({state: "success"});
   });
 });
