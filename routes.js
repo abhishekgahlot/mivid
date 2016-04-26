@@ -64,11 +64,6 @@ const videoModule = require('./server/modules/video/actions.js');
 const userModule = require('./server/modules/user/actions.js');
 const searchModule = require('./server/modules/search/search.js');
 
-app.get('/video/:id', (req, res) => {
-  const videoId = req.params.id;
-  res.send({videoUrl: videoModule.getTempVideoUrl(videoId)});
-});
-
 app.get('/logout', function(req, res) {
   console.log('Logging out');
   req.logout();
@@ -115,15 +110,7 @@ app.post('/video-meta', (req, res) => {
   });
 });
 
-app.get('/search', (req, res) => {
-  const query = req.query.query;
-  const page = req.query.page;
-  const size = req.query.size;
-  searchModule.search(query, page, size).then((data) => {
-    console.log('Ran the search for', query,  "and got the results", data);
-    res.send(data);
-  });
-});
+require('./api.js')(app);
 
 app.get('*', (req, res) => {
   if (req.user) {
