@@ -41,6 +41,7 @@ Amal tasks:
 # Release 1 (ToDOS):
 - Video uploading.
 - Get the initial video listing page up with paginations.
+- Design the handle page
 - Search results view with search working.
 - Individual Video streaming page (gallery can be part of a later release)
 - oAuth & user accounts.

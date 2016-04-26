@@ -117,7 +117,9 @@ app.post('/video-meta', (req, res) => {
 
 app.get('/search', (req, res) => {
   const query = req.query.query;
-  searchModule.search(query).then((data) => {
+  const page = req.query.page;
+  const size = req.query.size;
+  searchModule.search(query, page, size).then((data) => {
     console.log('Ran the search for', query,  "and got the results", data);
     res.send(data);
   });
@@ -131,7 +133,7 @@ app.get('*', (req, res) => {
   }
 });
 
-dbConnect.connectToMongo().then(dbConnect.ensureIndex).then( () => {
+dbConnect.connectToMongo().then(dbConnect.ensureIndex).then(() => {
   app.listen(process.env.port || 8500, () => {
     console.log('Listening on port 8500');
   });

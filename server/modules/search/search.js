@@ -26,10 +26,23 @@ module.exports = {
       });
     });
   },
-  search: function(query) {
+  search: function(query, page, size) {
+    // start -> starting index, size -> count of results returned.
+    size = size || 30; //default number of results
+    if (size > 50) { // don't DDoS by requesting more than 50 results at a time
+      size = 30;
+    }
+    if (!page) {
+      page = 0;
+    } else {
+      page = page - 1;
+    }
+    console.log('Page #', page, "size", size);
     return new Promise((resolve) => {
       client.search({
-        q: query
+        q: query,
+        from: page,
+        size: size
       }).then(function (body) {
         var hits = body.hits.hits;
         resolve(hits);
