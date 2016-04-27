@@ -32,7 +32,6 @@ Amal tasks:
 
 * Notification system -> notify users on new comments on their videos and in replies to their comments -> me
 
-
 * OAuth & User accounts (done)
 
 * Handle creation (done)

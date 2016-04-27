@@ -60,9 +60,7 @@ require('./server/modules/auth/facebook.js')(app, passport);
 require('./server/modules/auth/google.js')(app, passport);
 
 // modules
-const videoModule = require('./server/modules/video/actions.js');
 const userModule = require('./server/modules/user/actions.js');
-const searchModule = require('./server/modules/search/search.js');
 
 app.get('/logout', function(req, res) {
   console.log('Logging out');
@@ -94,20 +92,6 @@ app.get('/createHandle', (req, res) => {
     console.log('User has handle, redirecting to home page');
     res.redirect('/');
   }
-});
-
-app.post('/video-meta', (req, res) => {
-  var videoMeta = req.body;
-  console.log('Got video meta data', videoMeta);
-  // write this to DB
-  // index on elasticSearch
-  videoModule.create(videoMeta)
-  .then(() => {
-    console.log('successfully created video in DB, adding to elasticSearch ');
-    delete videoMeta._id;
-    searchModule.indexDocument('video', videoMeta);
-    res.send({state: "success"});
-  });
 });
 
 require('./api.js')(app);

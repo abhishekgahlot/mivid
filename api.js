@@ -15,6 +15,20 @@ module.exports = function(app) {
     res.send('Got call to /api/videos');
   });
 
+  app.post('/video-meta', (req, res) => {
+    var videoMeta = req.body;
+    console.log('Got video meta data', videoMeta);
+    // write this to DB
+    // index on elasticSearch
+    videoModule.create(videoMeta)
+    .then(() => {
+      console.log('successfully created video in DB, adding to elasticSearch ');
+      delete videoMeta._id;
+      searchModule.indexDocument('video', videoMeta);
+      res.send({state: "success"});
+    });
+  });
+
 
   app.get('/api/search', (req, res) => {
     const query = req.query.query;
