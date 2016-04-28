@@ -55,14 +55,66 @@
     cursor: default !important;
 }
 
+/* Custom theme for Dropzone */
+.uploader-template{
+  border:1px solid;
+  margin: 40px;
+  height: 125px;
+}
+
+.uploader-template .preview-img{
+  height: 120px;
+  display: inline-block;
+  float: left;
+}
+
+.uploader-template .dz-details{
+  height: 120px;
+  display: inline-block;
+  float:left;
+  margin-left: 25px;
+}
+
+.uploader-template h4{
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.uploader-template .dz-size h5{
+    display: inline-block;
+    margin-right: 15px;
+    margin-left: -60px;
+}
+
+.uploader-template .dz-filename span {
+  font-size: 17px;
+}
+
+.uploader-template .dz-size span{
+  font-size: 15px;
+}
+
 </style>
 <div class="container upload-container">
     <div class="dropzone" id="uploadVideos">
+        <!-- Uplaoder Custom Template -->
+        <div id="uploader-template" style="display: none;">
+          <div class="uploader-template">
+            <div class="preview-img"><img data-dz-thumbnail /></div>
+            <div class="dz-details">
+              <div class="dz-filename"><h4>Title </h4><span contentEditable="true" data-dz-name></span></div>
+              <div class="dz-size"> <span>Size </span> <span data-dz-size></span> </div>
+            </div>
+          </div>
+        </div>
+
         <h2 class="upl-max-txt">You can upload Videos</h2>
         <h4 class="upl-mini-txt">Click On The Button Or Drag & Drop Files Here</h4>
         <div id="uploadgroupbtn">
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary btn-lg btn-upload btn-upl-lft"><i class="fa fa-upload" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-primary btn-lg btn-upload btn-upl-lft">
+              <i class="fa fa-upload" aria-hidden="true"></i>
+            </button>
             <button type="button" class="btn btn-primary btn-lg btn-upload">Upload Video</button>
           </div>
         </div>
@@ -73,6 +125,7 @@
     {
       url: "http://upload.mivid.co:8501",
       maxFilesize: 5,
+      previewTemplate: document.getElementById('uploader-template').innerHTML,
       init: function(){
         $(".btn-upload").on("click", function(){
           this.hiddenFileInput.click();
