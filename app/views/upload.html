@@ -61,21 +61,18 @@
   border-radius: 4px;
   margin: 50px;
   height: 180px;
+  padding: 10px;
 }
 
 .uploader-template .preview-img{
   height: 120px;
   display: inline-block;
-  float: left;
   margin: 2px;
 }
 
 .uploader-template .dz-details{
   height: 120px;
-  display: inline-block;
-  float:left;
-  margin-left: 25px;
-  text-align: left;
+  margin-left: 35px;
 }
 
 .uploader-template h4{
@@ -101,16 +98,22 @@
 <div class="container upload-container">
     <div class="dropzone" id="uploadVideos">
         <!-- Uplaoder Custom Template -->
-        <div id="uploader-template" style="display: none;">
-          <div class="uploader-template">
-            <div class="preview-img"><img data-dz-thumbnail /></div>
-            <div class="dz-details">
-              <div class="form-group">
-							  <input type="text" class="form-control" id="title" placeholder="Title">
-							</div>
-              <div class="form-group">
-                <textarea class="form-control" rows="3" id="description"></textarea>
-              </div>
+         <div id="uploader-template" style="display: none;">
+            <div class="uploader-template">
+              <div class="row">
+                <div class="col-lg-2">
+                  <div class="preview-img"><img data-dz-thumbnail /></div>
+                </div>
+                <div class="col-lg-10">
+                  <div class="dz-details">
+                    <div class="form-group">
+      							  <input type="text" class="form-control" id="title" placeholder="Title">
+      							</div>
+                    <div class="form-group">
+                      <textarea class="form-control" rows="4" id="description" placeholder="Description"></textarea>
+                    </div>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -144,7 +147,6 @@
     });
     uploader.on('addedfile', function(file){
       file.previewElement.getElementsByTagName('input')[0].value = file.name;
-      window.bat = file;
     })
     $(".dz-default.dz-message").hide();
 </script>
