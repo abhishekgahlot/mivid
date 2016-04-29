@@ -57,15 +57,17 @@
 
 /* Custom theme for Dropzone */
 .uploader-template{
-  border:1px solid;
-  margin: 40px;
-  height: 125px;
+  border:1px solid rgba(221,221,221,0.68);
+  border-radius: 4px;
+  margin: 50px;
+  height: 180px;
 }
 
 .uploader-template .preview-img{
   height: 120px;
   display: inline-block;
   float: left;
+  margin: 2px;
 }
 
 .uploader-template .dz-details{
@@ -73,6 +75,7 @@
   display: inline-block;
   float:left;
   margin-left: 25px;
+  text-align: left;
 }
 
 .uploader-template h4{
@@ -81,9 +84,9 @@
 }
 
 .uploader-template .dz-size h5{
-    display: inline-block;
-    margin-right: 15px;
-    margin-left: -60px;
+  display: inline-block;
+  margin-right: 15px;
+  margin-left: -60px;
 }
 
 .uploader-template .dz-filename span {
@@ -102,8 +105,12 @@
           <div class="uploader-template">
             <div class="preview-img"><img data-dz-thumbnail /></div>
             <div class="dz-details">
-              <div class="dz-filename"><h4>Title </h4><span contentEditable="true" data-dz-name></span></div>
-              <div class="dz-size"> <span>Size </span> <span data-dz-size></span> </div>
+              <div class="form-group">
+							  <input type="text" class="form-control" id="title" placeholder="Title">
+							</div>
+              <div class="form-group">
+                <textarea class="form-control" rows="3" id="description"></textarea>
+              </div>
             </div>
           </div>
         </div>
@@ -135,5 +142,9 @@
     uploader.on('sending', function(file, xhr, formData){
       xhr.setRequestHeader('user', JSON.stringify(Mivid.user));
     });
+    uploader.on('addedfile', function(file){
+      file.previewElement.getElementsByTagName('input')[0].value = file.name;
+      window.bat = file;
+    })
     $(".dz-default.dz-message").hide();
 </script>
