@@ -38,6 +38,11 @@ var app = angular.module('mividApp', [
         controller: 'RegisterCtrl',
         controllerAs: 'register'
       })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'login'
+      })
       .when('/upload', {
         templateUrl: 'views/upload.html',
         controller: 'UploadCtrl',
