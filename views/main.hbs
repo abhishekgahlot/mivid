@@ -2,22 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Mivid</title>
+    <title></title>
     <base href="/">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="styles/vendor.css">
 
-    <script>
-      window.Mivid = {}; Mivid.user = {};
-      Mivid.user = {{{user}}};
-    </script>
+    <script> window.Mivid = {}; Mivid.user = {}; </script>
     <link rel="stylesheet" href="styles/font-awesome.css" />
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="styles/library.css" />
     <link rel="stylesheet" href="styles/videojs.css" />
-
   </head>
   <body ng-app="mividApp" style="padding:60px;" id ="body">
     <nav class="navbar navbar-default navbar-fixed-top navbar-primary">
@@ -35,12 +31,13 @@
         <div class="collapse navbar-collapse" id="navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li><a data-toggle="modal" data-target="#loginUser">Sign in</a></li>
-            <li><a  data-toggle="modal" data-target="#registerUser">Sign up</a></li>
-            <li><a href="upload" class="btn btn-primary"><b><i class="fa fa-cloud-upload"></i> Upload</b></a></li>
+            <li><a data-toggle="modal" data-target="#registerUser">Sign up</a></li>
+            <li><a href="user/#someuser">Username</a></li>
+            <li><a href="/upload" class="btn btn-primary"><b><i class="fa fa-cloud-upload"></i> Upload</b></a></li>
           </ul>
-          <form class="navbar-form navbar-right" role="search" action="/api/search" method='GET'>
+          <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search" name="query">
+              <input type="text" class="form-control" placeholder="Search">
             </div>
           </form>
         </div><!-- /.navbar-collapse -->
@@ -64,7 +61,7 @@
                       <a class="btn btn-block btn-social btn-google-plus" target="_self" href="/login/google"><i class="fa fa-google"></i> Sign in with Google</a>
                   </div>
                   <div class="form-group text-center mg-top">
-                      <a class="btn btn-block btn-social btn-twitter" target="_self" href="/login/twitter"><i class="fa fa-twitter"></i> Sign in with Twitter</a>
+                      <a class="btn btn-block btn-social btn-twitter" target="_self"><i class="fa fa-twitter"></i> Sign in with Twitter</a>
                   </div>
                 </div>
               </div>
@@ -83,13 +80,13 @@
                     <div class="panel-body">
                         <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
                         <div class="form-group text-center">
-                            <a class="btn btn-block btn-social btn-facebook" target="_self" href="/login/facebook"><i class="fa fa-facebook"></i> Sign up with Facebook</a>
+                            <a class="btn btn-block btn-social btn-facebook" target="_self"><i class="fa fa-facebook"></i> Sign up with Facebook</a>
                         </div>
                         <div class="form-group text-center mg-top">
-                            <a class="btn btn-block btn-social btn-google-plus" target="_self" href="/login/google"><i class="fa fa-google"></i> Sign up with Google</a>
+                            <a class="btn btn-block btn-social btn-google-plus" target="_self"><i class="fa fa-google"></i> Sign up with Google</a>
                         </div>
                         <div class="form-group text-center mg-top">
-                            <a class="btn btn-block btn-social btn-twitter" target="_self" href="/login/twitter"><i class="fa fa-twitter"></i> Sign up with Twitter</a>
+                            <a class="btn btn-block btn-social btn-twitter" target="_self"><i class="fa fa-twitter"></i> Sign up with Twitter</a>
                         </div>
                     </div>
                 </div>
