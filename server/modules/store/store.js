@@ -3,15 +3,20 @@
 var assert = require('assert');
 
 module.exports = {
-    findByAttribute: (collectionName, attributeName, queryValue) => {
+    findOneByAttribute: (collectionName, attributeName, queryValue) => {
       return new Promise((resolve) => {
         let findObj = {};
         findObj[attributeName] = queryValue;
+        console.log('In store, queryValue', queryValue);
         GLOBAL.db.collection(collectionName).findOne(findObj, (err, results) => {
           assert.equal(err, null);
           resolve(results);
         });
       });
+    },
+
+    findByAttribute: (collection, attributeName, queryValue) => {
+
     },
 
     create: (collectionName, data) => {

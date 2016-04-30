@@ -41,9 +41,9 @@
             <li ng-hide="username" class="ng-hide"><a href="user/#someuser">Username</a></li>
             <li><a href="/upload" class="btn btn-primary"><b><i class="fa fa-cloud-upload"></i> Upload</b></a></li>
           </ul>
-          <form class="navbar-form navbar-right" role="search">
+          <form class="navbar-form navbar-right" role="search" method="GET" action="/api/search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
+              <input type="text" class="form-control" placeholder="Search" name="query">
             </div>
           </form>
         </div><!-- /.navbar-collapse -->

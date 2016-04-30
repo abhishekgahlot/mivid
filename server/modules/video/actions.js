@@ -16,6 +16,12 @@ module.exports = {
     });
   },
 
+  findByUser: (handle) => {
+    console.log('Got query for ', handle);
+    // TODO change findOne to find to return all uploads
+    return store.findByAttribute('videos', 'user', handle);
+  },
+
   getTempVideoUrl: (videoId) => {
     //create the temporary video url using AES CTR encryption, send to client
     const timestamp = Date.now();

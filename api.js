@@ -4,11 +4,30 @@
 
 const searchModule = require('./server/modules/search/search.js');
 const videoModule = require('./server/modules/video/actions.js');
+const userModule = require('./server/modules/user/actions.js');
 
 module.exports = function(app) {
   app.get('/api/video/:id', (req, res) => {
     const videoId = req.params.id;
     res.send({videoUrl: videoModule.getTempVideoUrl(videoId)});
+  });
+
+  app.get('/api/user/:handle', (req, res) => {
+    //return a user's information, for rendering profile pages
+    let user;
+    userModule.findByHandle(req.params.handle)
+    .then((u) => {
+       user = u;
+       if(!user) {
+         return res.send({user: null});
+       }
+       return videoModule.findByUser(user.handle);
+    })
+   .then((videos) => {
+     console.log('Got query results', videos);
+     user.uploads = videos;
+     res.send({user: user});
+   });
   });
 
   app.get('/api/videos', (req, res) => {
