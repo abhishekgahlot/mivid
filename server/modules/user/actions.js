@@ -4,11 +4,11 @@ const store = require('../store/store.js');
 
 module.exports = {
     findByEmail: (email) => {
-      return store.findByOneAttribute('users','email', email);
+      return store.findOneByAttribute('users','email', email);
     },
 
     findByHandle: (handle) => {
-      return store.findByOneAttribute('users', 'handle', handle);
+      return store.findOneByAttribute('users', 'handle', handle);
     },
 
     create: (handle, email, fullname, type) => {
