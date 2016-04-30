@@ -8,15 +8,17 @@
  *
  * Main module of the application.
  */
-angular
-  .module('mividApp', [
+var app = angular.module('mividApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize'
-  ])
-  .config(['$routeProvider', '$locationProvider',function ($routeProvider, $locationProvider) {
+  ], function($interpolateProvider) {
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+ });
+ app.config(['$routeProvider', '$locationProvider',function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({
       enabled: true
     });

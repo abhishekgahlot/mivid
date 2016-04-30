@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="styles/videojs.css" />
   </head>
   <body ng-app="mividApp" style="padding:60px;" id ="body">
-    <nav class="navbar navbar-default navbar-fixed-top navbar-primary">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-primary" ng-controller="HeaderCtrl">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -36,9 +36,9 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li><a data-toggle="modal" data-target="#loginUser">Sign in</a></li>
-            <li><a data-toggle="modal" data-target="#registerUser">Sign up</a></li>
-            <li ng-hide="username" class="ng-hide"><a href="user/#someuser">Username</a></li>
+            <li ng-hide="handle"><a data-toggle="modal" data-target="#loginUser">Sign in</a></li>
+            <li ng-hide="handle"><a data-toggle="modal" data-target="#registerUser">Sign up</a></li>
+            <li ng-show="handle"><a href="/user/[[handle]]">[[handle]]</a></li>
             <li><a href="/upload" class="btn btn-primary"><b><i class="fa fa-cloud-upload"></i> Upload</b></a></li>
           </ul>
           <form class="navbar-form navbar-right" role="search">
