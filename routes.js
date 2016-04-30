@@ -65,7 +65,7 @@ const userModule = require('./server/modules/user/actions.js');
 app.get('/logout', function(req, res) {
   console.log('Logging out');
   req.logout();
-  res.redirect('/test');
+  res.redirect('/');
 });
 
 app.get('/createHandle', (req, res) => {
