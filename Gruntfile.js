@@ -537,6 +537,12 @@ module.exports = function (grunt) {
     'newer:jscs',
     'test',
     'build',
-    'watch'
+    'watch',
+    'copy:vendor',
+    'copy:angularTemplates',
+    'copy:less',
+    'copy:css',
+    'copy:fonts',
+    'copy:views'
   ]);
 };
