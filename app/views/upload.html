@@ -16,13 +16,19 @@
                       <textarea class="form-control" rows="4" id="description" placeholder="Description"></textarea>
                     </div>
                     <div class="form-group">
-                      <input class="select2-tags" type="search" role="textbox" aria-autocomplete="list" placeholder="Select Tags">
+
                     </div>
                   </div>
                 </div>
             </div>
           </div>
         </div>
+
+    <select class="js-example-tags form-control" multiple="multiple">
+          <option selected="selected">orange</option>
+          <option>white</option>
+          <option selected="selected">purple</option>
+        </select>
 
         <h2 class="upl-max-txt">You can upload Videos</h2>
         <h4 class="upl-mini-txt">Click On The Button Or Drag & Drop Files Here</h4>
@@ -53,14 +59,14 @@
     });
     uploader.on('addedfile', function(file){
       file.previewElement.getElementsByTagName('input')[0].value = file.name;
+
     });
     uploader.on('complete', function(file){
       console.log(file);
       window.cat = file;
     })
     $(".dz-default.dz-message").hide();
-    $(".select2-tags").select2({
-      tags: true
-    })
-
+$(".js-example-tags").select2({
+  tags: true
+})
 </script>
