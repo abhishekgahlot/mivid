@@ -43,6 +43,11 @@ var app = angular.module('mividApp', [
         controller: 'LoginCtrl',
         controllerAs: 'login'
       })
+      .when('/gallery/:videoId', {
+        templateUrl: 'views/gallery.html',
+        controller: 'GalleryCtrl',
+        controllerAs: 'gallery'
+      })
       .when('/upload', {
         templateUrl: 'views/upload.html',
         controller: 'UploadCtrl',

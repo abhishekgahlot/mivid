@@ -7,3 +7,4 @@ require('./controllers/user.js');
 require('./controllers/upload.js');
 require('./controllers/handle.js');
 require('./controllers/header.js');
+require('./controllers/gallery.js');
