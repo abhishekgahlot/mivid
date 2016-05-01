@@ -16,7 +16,21 @@ module.exports = {
     },
 
     findByAttribute: (collection, attributeName, queryValue) => {
-
+       return new Promise((resolve) => {
+         let findObj = {};
+         findObj[attributeName] = queryValue;
+         const cursor = GLOBAL.db.collection(collection).find(findObj);
+         let results = [];
+         cursor.each((err, doc) => {
+           assert.equal(err, null);
+           console.log('Doc is ', doc);
+           if(doc !== null) {
+             results.push(doc);
+           } else {
+             resolve(results);
+           }
+         });
+       });
     },
 
     create: (collectionName, data) => {
