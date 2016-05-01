@@ -15,6 +15,7 @@ html, body{
   min-height: 100%;
   font-family: 'Roboto', sans-serif;
   background: #f5f8fa;
+  font-size: 15px;
 }
 
 .btn:focus, .btn:active:focus, .btn.active:focus{

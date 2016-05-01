@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
   passport.use(new Strategy({
       clientID: config.auth.facebook.id,
       clientSecret: config.auth.facebook.secret,
-      callbackURL: 'http://localhost:8500/login/facebook/return',
+      callbackURL: 'http://mivid.co:8500/login/facebook/return',
       profileFields: ['id', 'emails', 'name']
     }, (accessToken, refreshToken, profile, cb) => {
       require('./oAuthExternal.js')(accessToken, refreshToken, profile, cb, 'facebook');
