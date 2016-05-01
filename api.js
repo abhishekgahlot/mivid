@@ -53,12 +53,15 @@ module.exports = function(app) {
   });
 
   app.post('/api/video/edit', (req, res) => {
-    const guid = req.body.guid;
-    console.log('In /video/edit, got guid to edit', guid);
-    videoModule.update({guid: guid}, req.body)
-    .then(() => {
-      res.send({state: "successs"});
+    const videos = JSON.parse(req.body);
+    let cnt = 0;
+    videos.forEach((videoMeta) => {
+      videoModule.update({guid: videoMeta.guid}, videos[cnt])
+      .then(() => {
+        cnt++;
+      });
     });
+    res.send({count: cnt});
   });
 
   app.get('/api/search', (req, res) => {
