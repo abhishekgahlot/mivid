@@ -16,6 +16,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <!-- endbuild -->
     <script> window.Mivid = {}; Mivid.user = {}; Mivid.user = {{{user}}}; </script>
+    <link rel="stylesheet" href="styles/select2.css" />
     <link rel="stylesheet" href="styles/font-awesome.css" />
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="styles/library.css" />
@@ -47,7 +48,7 @@
                 <li><a target="_self" href="/logout">Logout</a></li>
               </ul>
             </li>
-            <li><a href="/upload"><b><i class="fa fa-upload"></i>&nbsp;&nbsp; Upload</b></a></li>
+            <li><a href="/upload"><i class="fa fa-upload"></i>&nbsp;&nbsp; Upload</a></li>
           </ul>
           <form class="navbar-form" method="GET" action="/api/search">
             <div class="form-group" style="display:flex;">
@@ -153,6 +154,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="bower_components/select2/dist/js/select2.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/app.js -->
