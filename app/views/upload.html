@@ -16,19 +16,13 @@
                       <textarea class="form-control" rows="4" id="description" placeholder="Description"></textarea>
                     </div>
                     <div class="form-group">
-
+                      <select class="uploader-tags form-control" multiple="multiple"></select>
                     </div>
                   </div>
                 </div>
             </div>
           </div>
         </div>
-
-    <select class="js-example-tags form-control" multiple="multiple">
-          <option selected="selected">orange</option>
-          <option>white</option>
-          <option selected="selected">purple</option>
-        </select>
 
         <h2 class="upl-max-txt">You can upload Videos</h2>
         <h4 class="upl-mini-txt">Click On The Button Or Drag & Drop Files Here</h4>
@@ -46,7 +40,7 @@
     var uploader = window.uploader = new Dropzone("div#uploadVideos",
     {
       url: "http://upload.mivid.co:8501",
-      maxFilesize: 5,
+      maxFilesize: 150,
       previewTemplate: document.getElementById('uploader-template').innerHTML,
       init: function(){
         $(".btn-upload").on("click", function(){
@@ -59,14 +53,15 @@
     });
     uploader.on('addedfile', function(file){
       file.previewElement.getElementsByTagName('input')[0].value = file.name;
-
+      $(".uploader-tags").select2({
+        tags: true,
+        placeholder: "Select Tags",
+      });
     });
     uploader.on('complete', function(file){
       console.log(file);
       window.cat = file;
     })
     $(".dz-default.dz-message").hide();
-$(".js-example-tags").select2({
-  tags: true
-})
+
 </script>
