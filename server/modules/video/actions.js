@@ -16,6 +16,11 @@ module.exports = {
     });
   },
 
+  findByGuid: (guid) => {
+    console.log('Got query for finding video by guid', guid);
+    return store.findOneByAttribute('vidoes', 'guid', guid);
+  },
+
   findByUser: (handle) => {
     console.log('Got query for ', handle);
     // TODO change findOne to find to return all uploads
@@ -34,5 +39,9 @@ module.exports = {
     metaData.creationTime = Date.now();
     console.log('Storing video metatdata to DB', metaData);
     return store.create('videos', metaData);
+  },
+
+  update: (query, attributes) => {
+    return store.update('videos', query, attributes);
   }
 };

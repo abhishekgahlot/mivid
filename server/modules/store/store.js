@@ -15,15 +15,20 @@ module.exports = {
       });
     },
 
-    findByAttribute: (collection, attributeName, queryValue) => {
+    findByAttribute: (collection, attributeName, queryValue, limit, sort) => {
        return new Promise((resolve) => {
          let findObj = {};
          findObj[attributeName] = queryValue;
-         const cursor = GLOBAL.db.collection(collection).find(findObj);
+         if (!limit) {
+           limit = 30;
+         }
+         if (!sort) {
+           sort = {};
+         }
+         const cursor = GLOBAL.db.collection(collection).find(findObj).limit(limit).sort(sort);
          let results = [];
          cursor.each((err, doc) => {
            assert.equal(err, null);
-           console.log('Doc is ', doc);
            if(doc !== null) {
              results.push(doc);
            } else {

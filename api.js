@@ -34,8 +34,12 @@ module.exports = function(app) {
     res.send('Got call to /api/videos');
   });
 
+  app.get('/api/videos/newest', (req, res) => {
+    res.send('Sending newest videos');
+  });
+
   app.post('/video-meta', (req, res) => {
-    var videoMeta = req.body;
+    const videoMeta = req.body;
     console.log('Got video meta data', videoMeta);
     // write this to DB
     // index on elasticSearch
@@ -48,6 +52,14 @@ module.exports = function(app) {
     });
   });
 
+  app.post('/api/video/edit', (req, res) => {
+    const guid = req.body.guid;
+    console.log('In /video/edit, got guid to edit', guid);
+    videoModule.update({guid: guid}, req.body)
+    .then(() => {
+      res.send({state: "successs"});
+    });
+  });
 
   app.get('/api/search', (req, res) => {
     const query = req.query.query;
