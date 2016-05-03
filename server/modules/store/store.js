@@ -3,7 +3,7 @@
 var assert = require('assert');
 
 module.exports = {
-    find: (collectionName, pageNumber, sort = {}, limit = 30) => {
+    find: (collectionName, pageNumber = 1, sort = {}, limit = 30) => {
       // uses sort functionality to sort by either Time (for newest videos) or by score (for generating trending vidoes)
       return new Promise((resolve) => {
         const skip = (pageNumber > 0) ? ((pageNumber - 1) * limit) : 0;
@@ -33,11 +33,12 @@ module.exports = {
       });
     },
 
-    findByAttribute: (collection, attributeName, queryValue, sort = {}, limit = 30) => {
+    findByAttribute: (collection, attributeName, queryValue, pageNumber = 1, sort = {}, limit = 30) => {
        return new Promise((resolve) => {
          let findObj = {};
          findObj[attributeName] = queryValue;
-         const cursor = GLOBAL.db.collection(collection).find(findObj).limit(limit).sort(sort);
+         const skip = (pageNumber > 0) ? ((pageNumber - 1) * limit) : 0;
+         const cursor = GLOBAL.db.collection(collection).find(findObj).skip(skip).limit(limit).sort(sort);
          let results = [];
          cursor.each((err, doc) => {
            assert.equal(err, null);
