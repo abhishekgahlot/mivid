@@ -6,19 +6,12 @@ const store = require('../store/store.js');
 module.exports = {
 
   fetchList: (pageNumber) => {
-    console.log('Requested for trending vidoes, page', pageNumber);
-    return new Promise((resolve) => {
-      resolve([{
-        id: 'video id',
-        thumbnail: 'video thumbnail',
-        title: 'video title'
-      }]);
-    });
+    return store.find('videos');
   },
 
   findByGuid: (guid) => {
     console.log('Got query for finding video by guid', guid);
-    return store.findOneByAttribute('vidoes', 'guid', guid);
+    return store.findOneByAttribute('videos', 'guid', guid);
   },
 
   findByUser: (handle) => {

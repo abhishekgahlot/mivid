@@ -31,7 +31,10 @@ module.exports = function(app) {
   });
 
   app.get('/api/videos', (req, res) => {
-    res.send('Got call to /api/videos');
+    videoModule.fetchList()
+    .then((videos) => {
+      res.send(videos);
+    });
   });
 
   app.get('/api/videos/newest', (req, res) => {

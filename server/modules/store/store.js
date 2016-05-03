@@ -3,6 +3,22 @@
 var assert = require('assert');
 
 module.exports = {
+    find: (collectionName, pageNumber) => {
+      return new Promise((resolve) => {
+        const cursor = GLOBAL.db.collection(collectionName).find();
+        let results = [];
+        cursor.each((err, doc) => {
+          assert.equal(err, null);
+          if(doc !== null) {
+            results.push(doc);
+          } else {
+            console.log('In store, results are', results);
+            resolve(results);
+          }
+        });
+      });
+    },
+
     findOneByAttribute: (collectionName, attributeName, queryValue) => {
       return new Promise((resolve) => {
         let findObj = {};
