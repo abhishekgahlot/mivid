@@ -30,15 +30,20 @@ module.exports = function(app) {
    });
   });
 
-  app.get('/api/videos', (req, res) => {
-    videoModule.fetchList()
+  app.get('/api/videos/newest', (req, res) => {
+    let pageNumber = req.query.page;
+    if (!pageNumber) {
+      pageNumber = 1;
+    }
+    console.log('Geting newest videos, pageNumber is', pageNumber);
+    videoModule.fetchNewest(pageNumber)
     .then((videos) => {
       res.send(videos);
     });
   });
 
-  app.get('/api/videos/newest', (req, res) => {
-    res.send('Sending newest videos');
+  app.get('/api/videos/', (req, res) => {
+    res.send('Sending top videos');
   });
 
   app.post('/video-meta', (req, res) => {

@@ -3,16 +3,18 @@
 var assert = require('assert');
 
 module.exports = {
-    find: (collectionName, pageNumber) => {
+    find: (collectionName, pageNumber, sort = {}, limit = 30) => {
+      // uses sort functionality to sort by either Time (for newest videos) or by score (for generating trending vidoes)
       return new Promise((resolve) => {
-        const cursor = GLOBAL.db.collection(collectionName).find();
+        const skip = (pageNumber > 0) ? ((pageNumber - 1) * limit) : 0;
+        console.log("In store.find: skip, limit, sort are:", skip, limit, sort);
+        const cursor = GLOBAL.db.collection(collectionName).find().skip(skip).limit(limit).sort(sort);
         let results = [];
         cursor.each((err, doc) => {
           assert.equal(err, null);
           if(doc !== null) {
             results.push(doc);
           } else {
-            console.log('In store, results are', results);
             resolve(results);
           }
         });
@@ -31,16 +33,10 @@ module.exports = {
       });
     },
 
-    findByAttribute: (collection, attributeName, queryValue, limit, sort) => {
+    findByAttribute: (collection, attributeName, queryValue, sort = {}, limit = 30) => {
        return new Promise((resolve) => {
          let findObj = {};
          findObj[attributeName] = queryValue;
-         if (!limit) {
-           limit = 30;
-         }
-         if (!sort) {
-           sort = {};
-         }
          const cursor = GLOBAL.db.collection(collection).find(findObj).limit(limit).sort(sort);
          let results = [];
          cursor.each((err, doc) => {

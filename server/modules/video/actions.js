@@ -5,8 +5,12 @@ const store = require('../store/store.js');
 
 module.exports = {
 
-  fetchList: (pageNumber) => {
-    return store.find('videos');
+  fetchNewest: (pageNumber) => {
+    return store.find('videos', pageNumber, {creationTime: -1});
+  },
+
+  fetchTop: (pageNumber) => {
+    return store.find('videos', pageNumber, {score: -1});
   },
 
   findByGuid: (guid) => {
