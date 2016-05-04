@@ -33,6 +33,9 @@ module.exports = {
   },
 
   create: (metaData) => {
+    if (!metaData.score) {
+      metaData.score = 0; //start video with 0 as score on submission.
+    }
     metaData.creationTime = Date.now();
     console.log('Storing video metatdata to DB', metaData);
     return store.create('videos', metaData);
