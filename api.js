@@ -7,11 +7,6 @@ const videoModule = require('./server/modules/video/actions.js');
 const userModule = require('./server/modules/user/actions.js');
 
 module.exports = function(app) {
-  app.get('/api/video/:id', (req, res) => {
-    const videoId = req.params.id;
-    res.send({videoUrl: videoModule.getTempVideoUrl(videoId)});
-  });
-
   app.get('/api/user/:handle', (req, res) => {
     //return a user's information, for rendering profile pages
     let user;
@@ -28,6 +23,19 @@ module.exports = function(app) {
      user.uploads = videos;
      res.send({user: user});
    });
+  });
+
+  app.get('/api/video/:id', (req, res) => {
+    const videoId = req.params.id;
+    res.send({videoUrl: videoModule.getTempVideoUrl(videoId)});
+  });
+
+  app.get('/api/video/:id/upvote', (req, res) => {
+    res.send('Got upvote for videoId ' + req.params.id);
+  });
+
+  app.get('/api/video/:id/downvote', (req, res) => {
+    res.send('Got downvote for videoId ' + req.params.id);
   });
 
   app.get('/api/videos/newest', (req, res) => {
