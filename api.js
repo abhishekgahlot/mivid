@@ -31,11 +31,20 @@ module.exports = function(app) {
   });
 
   app.get('/api/video/:id/upvote', (req, res) => {
-    res.send('Got upvote for videoId ' + req.params.id);
+    console.log('Got api call to upvote');
+    videoModule.vote(req.params.id, 1)
+    .then((result) => {
+      console.log('Got promise resolved in api with', result);
+      res.send('success ' + result);
+    });
   });
 
   app.get('/api/video/:id/downvote', (req, res) => {
-    res.send('Got downvote for videoId ' + req.params.id);
+    videoModule.vote(req.params.id, -1)
+    .then((result) => {
+      console.log('Promise resolved for downvote with', result);
+      res.send('success' + result);
+    });
   });
 
   app.get('/api/videos/newest', (req, res) => {

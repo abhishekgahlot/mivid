@@ -1,9 +1,12 @@
 "use strict";
-
+/* jshint expr:true */
 const aesEncrypt = require('../../../utils.js').aesEncrypt;
 const store = require('../store/store.js');
+const config = require('../../../config.js');
 
-module.exports = {
+let self;
+
+module.exports = self = {
 
   fetchNewest: (pageNumber) => {
     return store.find('videos', pageNumber, {creationTime: -1});
@@ -13,9 +16,25 @@ module.exports = {
     return store.find('videos', pageNumber, {score: -1});
   },
 
-  findByGuid: (guid) => {
-    console.log('Got query for finding video by guid', guid);
-    return store.findOneByAttribute('videos', 'guid', guid);
+  findById: (videoId) => {
+    console.log('Got query for finding video by id', videoId);
+    return store.findOneByAttribute('videos', 'videoId', videoId);
+  },
+
+  vote: (videoId, vote) => {
+    console.log('videoModule.vote called');
+    //authorise vote: see if user has already voted, don't allow creator to vote
+    //compute score and increment upvote/downvote count
+    const gravity = config.ranking.gravity;
+    return new Promise((resolve) => {
+      self.findById(videoId)
+      .then((videoMeta) => {
+        (vote === 1) ? videoMeta.upvotes++ : videoMeta.downvotes++;
+        console.log('Found video meta for upvoted video', videoMeta);
+        console.log('Gravity is', gravity);
+        resolve(videoMeta);
+      });
+    });
   },
 
   findByUser: (handle) => {
@@ -34,7 +53,9 @@ module.exports = {
 
   create: (metaData) => {
     if (!metaData.score) {
-      metaData.score = 0; //start video with 0 as score on submission.
+      metaData.score = 0;
+      metaData.upvotes = 0;
+      metaData.downvotes = 0;
     }
     metaData.creationTime = Date.now();
     console.log('Storing video metatdata to DB', metaData);
