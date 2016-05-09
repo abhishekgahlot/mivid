@@ -1,8 +1,5 @@
 module.exports = {
   aesPassword: '~run2dahillz#!12300-1ax*EbAZ**~',
-  ranking: {
-    gravity: 1.8 // higher the gravity, the faster older submissions loose score
-  },
   redis: {
     secret: 'fluffyKittens@',
     host: 'localhost',

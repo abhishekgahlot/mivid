@@ -2,7 +2,7 @@
 /* jshint expr:true */
 const aesEncrypt = require('../../../utils.js').aesEncrypt;
 const store = require('../store/store.js');
-const config = require('../../../config.js');
+const mongo = require('mongodb');
 
 let self;
 
@@ -22,17 +22,48 @@ module.exports = self = {
   },
 
   vote: (videoId, vote) => {
+    // authorise vote: see if user has already voted, don't allow creator to vote
+    // compute score and increment upvote/downvote count
+    // the score is computed using reddit's ranking alogritm
+
     console.log('videoModule.vote called');
-    //authorise vote: see if user has already voted, don't allow creator to vote
-    //compute score and increment upvote/downvote count
-    const gravity = config.ranking.gravity;
     return new Promise((resolve) => {
       self.findById(videoId)
       .then((videoMeta) => {
+        console.log('Video Meta is ', videoMeta);
+
+        if (!videoMeta.upvotes) {
+          videoMeta.upvotes = 0;
+        }
+        if (!videoMeta.downvotes) {
+          videoMeta.downvotes = 0;
+        }
+
         (vote === 1) ? videoMeta.upvotes++ : videoMeta.downvotes++;
-        console.log('Found video meta for upvoted video', videoMeta);
-        console.log('Gravity is', gravity);
-        resolve(videoMeta);
+        const ts = videoMeta.creationTime - new Date('12/08/2005 07:46:00').valueOf();
+        const votes = videoMeta.upvotes - videoMeta.downvotes;
+        let y,z;
+        if (votes > 0) {
+          y = 1;
+        } else if (votes < 0) {
+          y = -1;
+        } else {
+          y = 0;
+        }
+        if (Math.abs(votes) >= 1) {
+          z = Math.abs(votes);
+        } else {
+          z = 1;
+        }
+        const score = Math.log10(z) + ((y * ts) / 45000);
+        console.log('Score is ', score);
+        // TODO: update videoMeta with new score, upvote/downvote count and write to DB
+        videoMeta.score = score;
+        const o_id = new mongo.ObjectID(videoMeta._id);
+        self.update({'_id': o_id}, videoMeta)
+        .then(() => {
+          resolve(videoMeta);
+        });
       });
     });
   },

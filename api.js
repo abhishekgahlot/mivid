@@ -35,7 +35,7 @@ module.exports = function(app) {
     videoModule.vote(req.params.id, 1)
     .then((result) => {
       console.log('Got promise resolved in api with', result);
-      res.send('success ' + result);
+      res.send('success ' + JSON.stringify(result));
     });
   });
 
@@ -43,7 +43,7 @@ module.exports = function(app) {
     videoModule.vote(req.params.id, -1)
     .then((result) => {
       console.log('Promise resolved for downvote with', result);
-      res.send('success' + result);
+      res.send('success' + JSON.stringify(result));
     });
   });
 
