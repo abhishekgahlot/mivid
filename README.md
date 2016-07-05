@@ -13,31 +13,7 @@ Running `grunt test` will run the unit tests with karma.
 
 ## TODO
 
-Abhishek tasks:
-----------------------
-* upload & thumbnails
-
-* stream
-
-* Commenting
-
-* Video gallery page
-
-
-Amal tasks:
------------------------
-* search & search results page.
-
-* User profile
-
-* Notification system -> notify users on new comments on their videos and in replies to their comments -> me
-
-* OAuth & User accounts (done)
-
-* Handle creation (done)
-
-
-# Release 1 (ToDOS):
+# Release 1:
 - Video uploading.
 - Get the initial video listing page up with paginations.
 - Design the handle page

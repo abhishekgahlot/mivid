@@ -42,7 +42,7 @@ module.exports = self = {
         (vote === 1) ? videoMeta.upvotes++ : videoMeta.downvotes++;
         const ts = videoMeta.creationTime - new Date('12/08/2005 07:46:00').valueOf();
         const votes = videoMeta.upvotes - videoMeta.downvotes;
-        let y,z;
+        let y, z;
         if (votes > 0) {
           y = 1;
         } else if (votes < 0) {
