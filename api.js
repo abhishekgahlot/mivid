@@ -7,8 +7,15 @@ const videoModule = require('./server/modules/video/actions.js');
 const userModule = require('./server/modules/user/actions.js');
 
 module.exports = function(app) {
+  /**
+   * Return a user's information, for rendering profile pages
+   *
+   * @section User
+   * @type get
+   * @url /api/user/:handle
+  */
   app.get('/api/user/:handle', (req, res) => {
-    //return a user's information, for rendering profile pages
+    //Get a user's information, for rendering profile pages
     let user;
     userModule.findByHandle(req.params.handle)
     .then((u) => {
@@ -25,11 +32,25 @@ module.exports = function(app) {
    });
   });
 
+/**
+ * Get video url
+ *
+ * @section Video
+ * @type get
+ * @url /api/video/:id
+ */
   app.get('/api/video/:id', (req, res) => {
     const videoId = req.params.id;
     res.send({videoUrl: videoModule.getTempVideoUrl(videoId)});
   });
 
+/**
+ * Upvote a video
+ *
+ * @section Video
+ * @type get
+ * @url /api/video/:id/upvote
+ */
   app.get('/api/video/:id/upvote', (req, res) => {
     console.log('Got api call to upvote');
     videoModule.vote(req.params.id, 1)
@@ -38,7 +59,13 @@ module.exports = function(app) {
       res.send('success ' + JSON.stringify(result));
     });
   });
-
+/**
+ * Downvote a Video
+ *
+ * @section Video
+ * @type get
+ * @url /api/video/:id/downvote
+ */
   app.get('/api/video/:id/downvote', (req, res) => {
     videoModule.vote(req.params.id, -1)
     .then((result) => {
@@ -47,6 +74,14 @@ module.exports = function(app) {
     });
   });
 
+  /**
+ * Get latest videos
+ *
+ * @section Video
+ * @type get
+ * @url /api/videos/newest
+ * @param {Integer} page
+ */
   app.get('/api/videos/newest', (req, res) => {
     let pageNumber = req.query.page;
     if (!pageNumber) {
@@ -59,10 +94,25 @@ module.exports = function(app) {
     });
   });
 
+  /**
+ * Get top videos
+ *
+ * @section Video
+ * @type get
+ * @url /api/videos/
+ */
   app.get('/api/videos/', (req, res) => {
     res.send('Sending top videos');
   });
 
+/**
+ * Create new video
+ *
+ * @section Video
+ * @type post
+ * @url /video-meta
+ * @param {Object} videoMeta
+ */
   app.post('/video-meta', (req, res) => {
     const videoMeta = req.body;
     console.log('Got video meta data', videoMeta);
@@ -77,6 +127,14 @@ module.exports = function(app) {
     });
   });
 
+/**
+ * Update video
+ *
+ * @section Video
+ * @type post
+ * @url /api/video/edit
+ * @param {Array} videos
+ */
   app.post('/api/video/edit', (req, res) => {
     const videos = JSON.parse(req.body);
     let cnt = 0;
