@@ -7,3 +7,5 @@
 dump.rdb
 public
 views/
+package-lock.json
+app/styles/less/layout.css
