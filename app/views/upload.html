@@ -39,8 +39,8 @@
 <script type="text/javascript">
     var uploader = window.uploader = new Dropzone("div#uploadVideos",
     {
-      // url: "http://upload.mivid.co:8501",
-      url: "http://localhost:8501",
+      url: "http://upload.mivid.co:8501",
+      // url: "http://localhost:8501",
       maxFilesize: 150,
       previewTemplate: document.getElementById('uploader-template').innerHTML,
       init: function(){
@@ -60,7 +60,7 @@
       });
     });
     uploader.on('complete', function(file){
-      console.log(file);
+      console.log("complete",file.xhr.responseText);
       window.cat = file;
     })
     $(".dz-default.dz-message").hide();

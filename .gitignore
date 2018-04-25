@@ -8,9 +8,7 @@ dump.rdb
 public
 views/
 package-lock.json
-<<<<<<< HEAD
 app/styles/less/layout.css
-=======
-app/styles/less/layout.css
+uploads
 .vscode
->>>>>>> reverted url changes
+thumbnails

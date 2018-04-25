@@ -58,6 +58,16 @@ var app = angular.module('mividApp', [
         controller: 'HandleCtrl',
         controllerAs: 'handle'
       })
+      .when('/dashboard', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        controllerAs: 'main'
+      })
+      .when('/:handle', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        controllerAs: 'main'
+      })
       .otherwise({
         redirectTo: '/'
       });

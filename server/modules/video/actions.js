@@ -71,7 +71,7 @@ module.exports = self = {
   findByUser: (handle) => {
     console.log('Got query for ', handle);
     // TODO change findOne to find to return all uploads
-    return store.findByAttribute('videos', 'user', handle);
+    return store.findByAttribute('videos', 'handle', handle);
   },
 
   getTempVideoUrl: (videoId) => {

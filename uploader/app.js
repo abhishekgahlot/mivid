@@ -11,6 +11,7 @@ var fs = require('fs');
 var uploader = require('./uploader.js');
 var config = require('./config.js');
 var util = require('./util.js');
+// const dbConnect = require('./dbConnect.js');
 
 // Enable cors
 app.use(cors());
@@ -32,15 +33,17 @@ app.post('/', upload.single('file'), function (req, res, next) {
     if (Object.keys(data).length){
       let meta = uploader.pushmetaData(config.fileMeta, data, user, size);
       uploader.generateScreenshot(meta.access, meta.name).then(function(thumbnail){
-        meta.thumbnails.push("thumbnails/" + thumbnail);
+        meta.thumbnails.push("/thumbnails/" + thumbnail);
         uploader.postMeta(config.metaurl, meta);
-        res.status(200).end();
+        res.send(200, meta).end();
       });
     }
   });
 
 });
 
-app.listen(8501, function () {
-  console.log('Upload app running on %s', config.port);
-});
+// dbConnect.connectToMongo().then(dbConnect.ensureIndex).then(() => {
+  app.listen(8501, function () {
+    console.log('Upload app running on %s', config.port);
+  });
+// });
