@@ -2,8 +2,38 @@
 
     <!-- Button trigger modal -->
 
-  <pre>
-    [[user | json]]
-  </pre>
-
+  <div ng-if="!user">
+    <h1>Invalid User. <small> check and retry </small></h1>
+  </div>
+  <div ng-if="!user.uploads">
+    <h1>No videos uploaded yet.
+      <small> Please come back later. </small>
+    </h1>
+  </div>
+  <div ng-if="user.uploads">
+    <h3>[[user.fullName]]
+      <small> [[user.uploads.length]] Videos</small>
+    </h3>
+    <hr>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-4 custom-card" ng-repeat="video in user.uploads">
+      <div class="card card-inverse card-info">
+        <img class="card-img-top" src="[[ video.thumbnails[0] ]]">
+        <div class="card-block">
+          <figure class="profile profile-inline">
+            <img src="[[ video.thumbnails[0] ]]" class="profile-avatar" alt="">
+          </figure>
+          <h5 class="card-title">[[ video.title | limitTo: 20 ]][[video.title.length > 20 ? '...' : '']]</h5>
+          <div class="card-text">
+            [[video.description]]
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="pull-left"> [[video.downvotes]] <span class="fa fa-thumbs-o-down" aria-hidden="true"></span></a>
+          <small>[[creationTime]]</small>
+          <a href="#" class="pull-right"> <span class="fa fa-thumbs-o-up" aria-hidden="true"></span> [[video.upvotes]]</a>
+          <div style="clear:both;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -17,14 +17,14 @@ angular.module('mividApp')
         var url = "/api/user/" + $routeParams.handle;
         $http.get(url)
           .then(function (response) {
-            $scope.user = response.data;
+            $scope.user = response.data.user;
           });
       }
     } else if (Mivid.user) {
       var url = "/api/user/"+Mivid.user.handle;
       $http.get(url)
         .then(function (response) {
-          $scope.user = response.data;
+          $scope.user = response.data.user;
         });
     } else {
       $location.path("/");
