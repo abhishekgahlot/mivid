@@ -5,10 +5,9 @@
   <div ng-if="!user">
     <h1>Invalid User. <small> check and retry </small></h1>
   </div>
+  <!-- replace the below condition with ng-if="user && !user.uploads" -->
   <div ng-if="!user.uploads">
-    <h1>No videos uploaded yet.
-      <small> Please come back later. </small>
-    </h1>
+    <h1>No videos uploaded yet.</h1>
   </div>
   <div ng-if="user.uploads">
     <h3>[[user.fullName]]
@@ -17,7 +16,10 @@
     <hr>
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-4 custom-card" ng-repeat="video in user.uploads">
       <div class="card card-inverse card-info">
-        <img class="card-img-top" src="[[ video.thumbnails[0] ]]">
+      <!-- <img class="card-img-top" src="[[ video.thumbnails[0] ]]"> -->
+        <!-- First of all, we need to add a thumbnail with a play button in center. Once the user clicks it, screen show transition and play the video -->
+        <!-- Add ng list for resolving the MIME type of a video on runtime -->
+        <video class="video-js"><source src="http://localhost:8599/streamer/[[user.handle]]/[[video.name]].mp4" type="video/mp4"></video>
         <div class="card-block">
           <figure class="profile profile-inline">
             <img src="[[ video.thumbnails[0] ]]" class="profile-avatar" alt="">
