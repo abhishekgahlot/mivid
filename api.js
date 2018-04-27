@@ -127,6 +127,25 @@ module.exports = function(app) {
     });
   });
 
+  /**
+ * Update video
+ *
+ * @section Video
+ * @type post
+ * @url /api/video/update
+ * @param {String} title
+ * @param {String} description
+ * @param {String} name
+ */
+
+  app.post('/api/video/update', (req, res) => {
+    const videoMeta = req.body;
+    videoModule.update({ name: videoMeta.videoName }, { title:videoMeta.title , description: videoMeta.description })
+      .then((result) => {
+        res.status(200).send(result);
+      });
+  });
+
 /**
  * Update video
  *

@@ -1,37 +1,48 @@
 <div class="container upload-container">
+    <button class="btn btn-default btn-upload pull-right" id="upload-btn2" style="display:none;"> Upload More Videos </button>
     <div class="dropzone" id="uploadVideos">
         <!-- Uplaoder Custom Template -->
          <div id="uploader-template" style="display: none;">
             <div class="uploader-template">
               <div class="row">
                 <div class="col-lg-3">
-                  <div class="preview-img"><img data-dz-thumbnail /></div>
+                  <div class="preview-img"><img data-dz-thumbnail class="img-thumbnail" src="/images/loading.gif" /></div>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                      aria-valuemax="100" style="width:0%">
+                      0%
+                    </div>
+                  </div>
                 </div>
                 <div class="col-lg-9">
                   <div class="dz-details">
                     <div class="form-group">
-      							  <input type="text" class="form-control" id="title" placeholder="Title">
+                      <input type="hidden" name="videoId" value="">
+      							  <input type="text" class="form-control" id="title" name="title" placeholder="Title">
       							</div>
                     <div class="form-group">
-                      <textarea class="form-control" rows="4" id="description" placeholder="Description"></textarea>
+                      <textarea class="form-control" rows="4" id="description" name="description" placeholder="Description"></textarea>
                     </div>
                     <div class="form-group">
-                      <select class="uploader-tags form-control" multiple="multiple"></select>
+                      <select class="uploader-tags form-control" name = "tags" multiple="multiple"></select>
                     </div>
+                    <button class="btn btn-primary btn-complete pull-right" style="display:none;"> Save </button>
+                    <div style="clear:both;"></div>
                   </div>
                 </div>
             </div>
           </div>
         </div>
-
-        <h2 class="upl-max-txt">You can upload Videos</h2>
-        <h4 class="upl-mini-txt">Click On The Button Or Drag & Drop Files Here</h4>
-        <div id="uploadgroupbtn">
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary btn-lg btn-upload btn-upl-lft">
-              <i class="fa fa-upload" aria-hidden="true"></i>
-            </button>
-            <button type="button" class="btn btn-primary btn-lg btn-upload">Upload Video</button>
+        <div class="to-hide">
+          <h2 class="upl-max-txt">You can upload Videos</h2>
+          <h4 class="upl-mini-txt">Click On The Button Or Drag & Drop Files Here</h4>
+          <div id="uploadgroupbtn">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-primary btn-lg btn-upload btn-upl-lft">
+                <i class="fa fa-upload" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="btn btn-primary btn-lg btn-upload">Upload Video</button>
+            </div>
           </div>
         </div>
     </div>
@@ -47,22 +58,60 @@
         $(".btn-upload").on("click", function(){
           this.hiddenFileInput.click();
         }.bind(this));
+      },
+      uploadprogress: function (file, progress, bytesSent) {
+        progress = parseInt(progress);
+        var progressBar = file.previewElement.getElementsByClassName('progress-bar')[0];
+        progressBar.innerHTML = progress + " %";
+        progressBar.setAttribute("aria-valuenow", progress);
+        progressBar.setAttribute("style", "width:"+progress+"%");
+        if (progress == 100) {
+          progressBar.innerHTML = "Completed";
+        }
       }
     });
     uploader.on('sending', function(file, xhr, formData){
       xhr.setRequestHeader('user', JSON.stringify(Mivid.user));
     });
     uploader.on('addedfile', function(file){
-      file.previewElement.getElementsByTagName('input')[0].value = file.name;
+      $(".to-hide").hide();
+      $("#upload-btn2").show();
+      file.previewElement.querySelector("input[name='title']").value = file.name;
       $(".uploader-tags").select2({
         tags: true,
         placeholder: "Select Tags",
       });
     });
     uploader.on('complete', function(file){
-      console.log("complete",file.xhr.responseText);
-      window.cat = file;
+      var response = JSON.parse(file.xhr.responseText);
+      file.previewElement.querySelector(".preview-img>img").setAttribute("src", response.thumbnails[0]);
+      file.previewElement.querySelector(".btn-complete").setAttribute("style", "display:block;");
+      file.previewElement.querySelector("input[name='videoId']").value = response.name;
     })
-    $(".dz-default.dz-message").hide();
+
+    $("#uploadVideos").on('click', ".btn-complete", function () {
+      var detailsElm = $(this).closest(".dz-details");
+      var videoName = $(detailsElm).find("input[type='hidden']").val();
+      var title = $(detailsElm).find("input[name='title']").val();
+      var description = $(detailsElm).find("textarea[name='description']").val();
+      var tags = $(detailsElm).find(".uploader-tags").val();
+      var btn = $(this)
+      btn.html("Updating . . .").attr('disabled',"disabled");
+
+      $.ajax({
+        url: "/api/video/update",
+        method: "post",
+        data: { videoName: videoName, title: title, description: description, tags: tags }
+      }).done(function (res) {
+        if (res) {
+          btn.html("Updating . . .").attr('disabled', false);
+          btn.html("Updated").removeClass('btn-danger').removeClass('btn-primary').addClass('btn-success');
+        } else {
+          btn.html("Updating . . .").attr('disabled', false);
+          btn.html("Try Again").removeClass('btn-success').removeClass('btn-primary').addClass('btn-danger');
+        }
+        
+      });
+    })
 
 </script>

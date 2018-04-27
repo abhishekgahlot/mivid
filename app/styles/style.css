@@ -193,8 +193,8 @@ body{
   border-radius: 2px;
   border:1px solid #d3e0e9;
   display: block;
-  min-height: 400px;
-  width: 50%;
+  min-height: 200px;
+  width: 80%;
   position: relative;
   text-align: center;
   padding:20px;
@@ -202,7 +202,7 @@ body{
 }
 
 #uploadVideos, .dropzone{
-    min-height: 400px;
+    min-height: 200px;
     border:none;
     padding: 0px;
 }
@@ -252,8 +252,12 @@ body{
   border:1px solid rgba(221,221,221,0.68);
   border-radius: 4px;
   margin: 50px;
-  height: 220px;
+  min-height: 220px;
   padding: 10px;
+}
+
+.uploader-template .progress{
+    margin-top: 10px;
 }
 
 /*.uploader-template .preview-img{
@@ -286,6 +290,11 @@ body{
   font-size: 15px;
 }
 
+.uploader-template .preview-img>img{
+    width: 100%;
+    min-height: 120px;
+}
+
 #select2-drop{
     width: 100% !important;
 }
@@ -293,6 +302,7 @@ body{
 .select2-container--default.select2-container--focus .select2-selection--multiple {
     border: 1px solid #d3e0e9;
     outline: 0;
+    width: 100%;
 }
 
 
