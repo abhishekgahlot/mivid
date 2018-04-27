@@ -305,7 +305,20 @@ body{
     width: 100%;
 }
 
+/* Overrides */
+.upload-container .btn, 
+.upload-container .well, 
+.upload-container .form-control, 
+.upload-container .btn, 
+.upload-container .img-thumbnail,
+.upload-container .select2-selection{
+    border-radius: 0px;
+}
 
+.upload-container #upload-btn2:hover{
+    background-color: #227ce5;
+    color: #ffffff;
+}
 /*
   Sidebar CSS
 */
