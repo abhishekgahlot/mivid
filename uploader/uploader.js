@@ -100,14 +100,14 @@ var uploader = {
       return new Promise(function(resolve, reject){
           ffmpeg(filepath).screenshots({
           	timestamps: [randomSecond],
-          	filename: filename + '.png',
+          	filename: filename + '.jpg',
           	folder: 'thumbnails',
           }).on('error', function(err) {
             reject(err);
             console.log(err);
           })
           .on('end', function() {
-            resolve(filename + '.png');
+            resolve(filename + '.jpg');
             console.log("generated");
           });
       });

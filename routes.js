@@ -42,6 +42,8 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.use("/thumbnails", express.static('uploader/thumbnails'));
+app.use("/uploads", express.static('uploads'));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
